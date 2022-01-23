@@ -1,3 +1,4 @@
+{{{
 =============================================================================
 12. Options                                                  *vimwiki-options*
 
@@ -59,3 +60,4 @@ For clarity, in your .vimrc file you can define wiki options using separate
 
     let g:vimwiki_list = [wiki_1, wiki_2]
 <
+}}}
