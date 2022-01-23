@@ -1,3 +1,4 @@
+{{{
 ------------------------------------------------------------------------------
 12.4 Global Options                                   *vimwiki-global-options*
 
@@ -528,12 +529,13 @@ Default: 1
 *g:vimwiki_conceal_pre*
 
 Conceal preformatted text markers. For example,
->
+}}}
     {{{python
     def say_hello():
         print("Hello, world!")
     }}}
->
+    
+{{{    
 would appear as simply
 >
     def say_hello():
@@ -817,3 +819,4 @@ option can allow other plugins to overwrite vimwiki settings and operation so
 take care when using it. Any plugin that uses a set filetype will be enabled.
 
 The default is `[ ]`e
+}}}

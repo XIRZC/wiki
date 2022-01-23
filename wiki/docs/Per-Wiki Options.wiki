@@ -1,3 +1,4 @@
+{{{
 ------------------------------------------------------------------------------
 12.3 Per-Wiki Options                                  *vimwiki-local-options*
 
@@ -227,6 +228,7 @@ Description~
 If on, wiki links to non-existent wiki files are highlighted.  However, it can
 be quite slow.  If you still want it, set maxhi to 1: >
   let g:vimwiki_list = [{'path': '~/my_site/', 'maxhi': 1}]
+  
 
 
 *vimwiki-option-nested_syntaxes*
@@ -243,7 +245,8 @@ For example the following setup in your vimrc: >
   let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
   let g:vimwiki_list = [wiki]
 
-would give you Python and C++ highlighting in: >
+would give you Python and C++ highlighting in: > 
+}}}
  {{{class="brush: python"
  for i in range(1, 5):
      print(i)
@@ -272,6 +275,7 @@ or in: >
  }}}
 
 
+{{{
 *vimwiki-option-automatic_nested_syntaxes*
 ------------------------------------------------------------------------------
 Key                        Default value~
@@ -281,10 +285,12 @@ Description~
 If set, the nested syntaxes (|vimwiki-option-nested_syntaxes|) are
 automatically derived when opening a buffer.
 Just write your preformatted text in your file like this >
+}}}
  {{{xxx
  my preformatted text
  }}}
 
+{{{
 where xxx is a filetype which is known to Vim. For example, for C++
 highlighting, use "cpp" (not "c++"). For a list of known filetypes, type
 ":setf " and hit Ctrl+d.
@@ -492,3 +498,4 @@ regeneration of HTML files.
 
 This setting also turns off the automatic deletion of files
 in the site_html directory which don't match existing wiki files.o
+}}}

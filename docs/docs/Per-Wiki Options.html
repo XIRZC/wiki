@@ -8,366 +8,244 @@
 </head>
 <body>
 
-<hr />
-<p>
-12.3 Per-Wiki Options                                  <span id="-vimwiki-local-options"></span><strong id="vimwiki-local-options">vimwiki-local-options</strong>
-</p>
+<pre>
+------------------------------------------------------------------------------
+12.3 Per-Wiki Options                                  *vimwiki-local-options*
 
 
-<p>
-<span id="-vimwiki-option-path"></span><strong id="vimwiki-option-path">vimwiki-option-path</strong>
-<hr />
+*vimwiki-option-path*
+------------------------------------------------------------------------------
 Key             Default value~
 path            ~/vimwiki/
-</p>
 
-<p>
 Description~
 Wiki files location: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/'}]
 &lt;
-</p>
 
-<p>
-<span id="-vimwiki-option-path_html"></span><strong id="vimwiki-option-path_html">vimwiki-option-path_html</strong>
-<hr />
+*vimwiki-option-path_html*
+------------------------------------------------------------------------------
 Key             Default value~
 path_html       ''
-</p>
 
-<p>
 Description~
 Location of HTML files converted from wiki files: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/',
-</p>
-<blockquote>
-\ 'path_html': '~/html_site/'}]
-</blockquote>
+                       \ 'path_html': '~/html_site/'}]
 
-<p>
 If path_html is an empty string, the location is derived from
 |vimwiki-option-path| by adding '_html'; i.e. for: &gt;
   let g:vimwiki_list = [{'path': '~/okidoki/'}]
-</p>
 
-<p>
 path_html will be set to '~/okidoki_html/'.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-name"></span><strong id="vimwiki-option-name">vimwiki-option-name</strong>
-<hr />
+*vimwiki-option-name*
+------------------------------------------------------------------------------
 Key             Default value~
 name            ''
-</p>
 
-<p>
 Description~
 A name that can be used to create interwiki links: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/',
-</p>
-<blockquote>
-\ 'name': 'My Wiki'}]
-</blockquote>
+                       \ 'name': 'My Wiki'}]
 
-<p>
 Valid names can contain letters, numbers, spaces, underscores, and dashes.
 If duplicate names are used the interwiki link will jump to the first wiki
 with a matching name in |g:vimwiki_list|.
-</p>
 
-<p>
 The assigned wiki name will also be shown in the menu entries in GVim.
 See the option |g:vimwiki_menu|.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-auto_export"></span><strong id="vimwiki-option-auto_export">vimwiki-option-auto_export</strong>
-<hr />
+*vimwiki-option-auto_export*
+------------------------------------------------------------------------------
 Key             Default value     Values~
 auto_export     0                 0, 1
-</p>
 
-<p>
 Description~
 Set this option to 1 to automatically generate the HTML file when the
 corresponding wiki page is saved: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'auto_export': 1}]
-</p>
 
-<p>
 This will keep your HTML files up to date.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-auto_toc"></span><strong id="vimwiki-option-auto_toc">vimwiki-option-auto_toc</strong>
-<hr />
+*vimwiki-option-auto_toc*
+------------------------------------------------------------------------------
 Key             Default value     Values~
 auto_toc        0                 0, 1
-</p>
 
-<p>
 Description~
 Set this option to 1 to automatically update the table of contents when the
 current wiki page is saved: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'auto_toc': 1}]
-</p>
 
 
-<p>
-<span id="-vimwiki-option-index"></span><strong id="vimwiki-option-index">vimwiki-option-index</strong>
-<hr />
+*vimwiki-option-index*
+------------------------------------------------------------------------------
 Key             Default value~
 index           index
-</p>
 
-<p>
 Description~
 Name of wiki index file: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'index': 'main'}]
-</p>
 
-<p>
 NOTE: Do not include the extension.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-ext"></span><strong id="vimwiki-option-ext">vimwiki-option-ext</strong>
-<hr />
+*vimwiki-option-ext*
+------------------------------------------------------------------------------
 Key             Default value~
 ext             .wiki
-</p>
 
-<p>
 Description~
 Extension of wiki files: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/',
-</p>
-<blockquote>
-\ 'index': 'main', 'ext': '.document'}]
-</blockquote>
+                       \ 'index': 'main', 'ext': '.document'}]
 
-<p>
 &lt;
-<span id="-vimwiki-option-syntax"></span><strong id="vimwiki-option-syntax">vimwiki-option-syntax</strong>
-<hr />
+*vimwiki-option-syntax*
+------------------------------------------------------------------------------
 Key             Default value     Values~
 syntax          default           default, markdown, or media
-</p>
 
-<p>
 Description~
 Wiki syntax.  You can use different markup languages (currently: Vimwiki's
 default, Markdown, and MediaWiki), but only Vimwiki's default markup will be
 converted to HTML at the moment.
-</p>
 
-<p>
 To use Markdown's wiki markup: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/',
-</p>
-<blockquote>
-\ 'syntax': 'markdown', 'ext': '.md'}]
-</blockquote>
+                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
-<p>
-<span id="-vimwiki-option-links_space_char"></span><strong id="vimwiki-option-links_space_char">vimwiki-option-links_space_char</strong>
-<hr />
+*vimwiki-option-links_space_char*
+------------------------------------------------------------------------------
 Key                 Default value~
 links_space_char    ' '
-</p>
 
-<p>
 Description~
 Set the character (or string) used to replace spaces when creating a link. For
-example, setting '_' would transform the string 'my link' into <a href="my_link.html">my_link</a> and
+example, setting '_' would transform the string 'my link' into [[my_link]] and
 the created file would be my_link.wiki. The default behavior does not replace
 spaces.
-</p>
 
-<p>
 To set the space replacement character: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/',
-</p>
-<blockquote>
-\ 'links_space_char': '_'}]
-</blockquote>
-<p>
+                       \ 'links_space_char': '_'}]
 &lt;
-</p>
 
-<p>
-<span id="-vimwiki-optin-template_path"></span><strong id="vimwiki-optin-template_path">vimwiki-optin-template_path</strong>
-<hr />
+*vimwiki-optin-template_path*
+------------------------------------------------------------------------------
 Key                 Default value~
 template_path       ~/vimwiki/templates/
-</p>
 
-<p>
 Description~
 Setup path for HTML templates: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/',
-</p>
-<blockquote>
-\ 'template_path': '~/public_html/templates/',
-\ 'template_default': 'def_template',
-\ 'template_ext': '.html'}]
-</blockquote>
+          \ 'template_path': '~/public_html/templates/',
+          \ 'template_default': 'def_template',
+          \ 'template_ext': '.html'}]
 
-<p>
 There could be a bunch of templates: &gt;
-</p>
-<blockquote>
-def_template.html
-index.html
-bio.html
-person.html
-</blockquote>
-<p>
+    def_template.html
+    index.html
+    bio.html
+    person.html
 etc.
-</p>
 
-<p>
 Each template could look like: &gt;
-</p>
-<blockquote>
-&lt;html&gt;
-&lt;head&gt;
-&lt;link rel="Stylesheet" type="text/css" href="%root_path%style.css" /&gt;
-&lt;title&gt;%title%&lt;/title&gt;
-&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-&lt;/head&gt;
-&lt;body&gt;
-<div class="content">
-%content%
-</div>
-&lt;p&gt;&lt;small&gt;Page created on %date%&lt;/small&gt;&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</blockquote>
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="Stylesheet" type="text/css" href="%root_path%style.css" /&gt;
+        &lt;title&gt;%title%&lt;/title&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="content"&gt;
+        %content%
+        &lt;/div&gt;
+        &lt;p&gt;&lt;small&gt;Page created on %date%&lt;/small&gt;&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
 
-<p>
 where
-  <code>%title%</code> is replaced by a wiki page name or by a |vimwiki-title|
-  <code>%date%</code> is replaced with the current date or by |vimwiki-date|
-  <code>%root_path%</code> is replaced by a count of ../ for pages buried in subdirs:
-</p>
-<blockquote>
-if you have wikilink <a href="dir1/dir2/dir3/my page in a subdir.html">dir1/dir2/dir3/my page in a subdir</a> then
-<code>%root_path%</code> is replaced by '../../../'.
-</blockquote>
-<p>
-  <code>%wiki_path%</code> Path to current wiki-file.` The file path to the current wiki
-</p>
-<blockquote>
-file. For example, if you are on page a/b.wiki %wiki-path% contains
-"a/b.wiki". Mostly useful if you want to link the to raw wiki page from
-the rendered version.
-</blockquote>
+  `%title%` is replaced by a wiki page name or by a |vimwiki-title|
+  `%date%` is replaced with the current date or by |vimwiki-date|
+  `%root_path%` is replaced by a count of ../ for pages buried in subdirs:
+    if you have wikilink [[dir1/dir2/dir3/my page in a subdir]] then
+    `%root_path%` is replaced by '../../../'.
+  `%wiki_path%` Path to current wiki-file.` The file path to the current wiki
+    file. For example, if you are on page a/b.wiki %wiki-path% contains
+    "a/b.wiki". Mostly useful if you want to link the to raw wiki page from
+    the rendered version.
 
-<p>
-  <code>%content%</code> is replaced by a wiki file content.
-</p>
+  `%content%` is replaced by a wiki file content.
 
 
-<p>
 The default template will be applied to all wiki pages unless a page specifies
 a template. Consider you have wiki page named 'Maxim.wiki' and you want apply
 'person.html' template to it. Just add: &gt;
+ %template person
 to that page.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-template_default"></span><strong id="vimwiki-option-template_default">vimwiki-option-template_default</strong>
-<hr />
+*vimwiki-option-template_default*
+------------------------------------------------------------------------------
 Key                 Default value~
 template_default    default
-</p>
 
-<p>
 Description~
 Setup default template name (without extension).
-</p>
 
-<p>
 See |vimwiki-option-template_path| for details.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-template_ext"></span><strong id="vimwiki-option-template_ext">vimwiki-option-template_ext</strong>
-<hr />
+*vimwiki-option-template_ext*
+------------------------------------------------------------------------------
 Key                 Default value~
 template_ext        .tpl
-</p>
 
-<p>
 Description~
 Setup template filename extension.
-</p>
 
-<p>
 See |vimwiki-option-template_path| for details.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-css_name"></span><strong id="vimwiki-option-css_name">vimwiki-option-css_name</strong>
-<hr />
+*vimwiki-option-css_name*
+------------------------------------------------------------------------------
 Key             Default value~
 css_name        style.css
-</p>
 
-<p>
 Description~
 Setup CSS file name: &gt;
   let g:vimwiki_list = [{'path': '~/my_pages/',
-</p>
-<blockquote>
-\ 'css_name': 'main.css'}]
-</blockquote>
-<p>
+          \ 'css_name': 'main.css'}]
 &lt;
 or even &gt;
   let g:vimwiki_list = [{'path': '~/my_pages/',
-</p>
-<blockquote>
-\ 'css_name': 'css/main.css'}]
-</blockquote>
-<p>
+          \ 'css_name': 'css/main.css'}]
 &lt;
 Vimwiki comes with a default CSS file "style.css".
-</p>
 
 
-<p>
-<span id="-vimwiki-option-maxhi"></span><strong id="vimwiki-option-maxhi">vimwiki-option-maxhi</strong>
-<hr />
+*vimwiki-option-maxhi*
+------------------------------------------------------------------------------
 Key             Default value     Values~
 maxhi           0                 0, 1
-</p>
 
-<p>
 Description~
 If on, wiki links to non-existent wiki files are highlighted.  However, it can
 be quite slow.  If you still want it, set maxhi to 1: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'maxhi': 1}]
-</p>
+  
 
 
-<p>
-<span id="-vimwiki-option-nested_syntaxes"></span><strong id="vimwiki-option-nested_syntaxes">vimwiki-option-nested_syntaxes</strong>
-<hr />
+*vimwiki-option-nested_syntaxes*
+------------------------------------------------------------------------------
 Key             Default value     Values~
 nested_syntaxes {}                pairs of highlight keyword and Vim filetype
-</p>
 
-<p>
 Description~
 You can configure preformatted text to be highlighted with any syntax
 available for Vim.
@@ -376,11 +254,9 @@ For example the following setup in your vimrc: &gt;
   let wiki.path = '~/my_wiki/'
   let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
   let g:vimwiki_list = [wiki]
-</p>
 
-<p>
-would give you Python and C++ highlighting in: &gt;
-</p>
+would give you Python and C++ highlighting in: &gt; 
+</pre>
 <pre class="brush: python">
  for i in range(1, 5):
      print(i)
@@ -411,230 +287,148 @@ or in: &gt;
 </pre>
 
 
-<p>
-<span id="-vimwiki-option-automatic_nested_syntaxes"></span><strong id="vimwiki-option-automatic_nested_syntaxes">vimwiki-option-automatic_nested_syntaxes</strong>
-<hr />
+<pre>
+*vimwiki-option-automatic_nested_syntaxes*
+------------------------------------------------------------------------------
 Key                        Default value~
 automatic_nested_syntaxes  1
-</p>
 
-<p>
 Description~
 If set, the nested syntaxes (|vimwiki-option-nested_syntaxes|) are
 automatically derived when opening a buffer.
 Just write your preformatted text in your file like this &gt;
-</p>
+</pre>
 <pre xxx>
  my preformatted text
 </pre>
 
-<p>
+<pre>
 where xxx is a filetype which is known to Vim. For example, for C++
 highlighting, use "cpp" (not "c++"). For a list of known filetypes, type
 ":setf " and hit Ctrl+d.
-</p>
 
-<p>
 Note that you may have to reload the file (|:edit|) to see the highlight.
-</p>
 
-<p>
 Since every file is scanned for the markers of preformatted text when it is
 opened, it can be slow when you have huge files. In this case, set this option
 to 0.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-diary_rel_path"></span><strong id="vimwiki-option-diary_rel_path">vimwiki-option-diary_rel_path</strong>
-<hr />
+*vimwiki-option-diary_rel_path*
+------------------------------------------------------------------------------
 Key             Default value~
 diary_rel_path  diary/
-</p>
 
-<p>
 Description~
 The path to the diary wiki files, relative to |vimwiki-option-path|.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-diary_index"></span><strong id="vimwiki-option-diary_index">vimwiki-option-diary_index</strong>
-<hr />
+*vimwiki-option-diary_index*
+------------------------------------------------------------------------------
 Key             Default value~
 diary_index     diary
-</p>
 
-<p>
 Description~
 Name of wiki-file that holds all links to dated wiki files.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-diary_header"></span><strong id="vimwiki-option-diary_header">vimwiki-option-diary_header</strong>
-<hr />
+*vimwiki-option-diary_header*
+------------------------------------------------------------------------------
 Key             Default value~
 diary_header    Diary
-</p>
 
-<p>
 Description~
 Name of the header in |vimwiki-option-diary_index| where links to dated
 wiki-files are located.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-diary_sort"></span><strong id="vimwiki-option-diary_sort">vimwiki-option-diary_sort</strong>
-<hr />
+*vimwiki-option-diary_sort*
+------------------------------------------------------------------------------
 Key             Default value   Values~
 diary_sort      desc            desc, asc
-</p>
 
-<p>
 Description~
 Sort links in a diary index page.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-diary_caption_level"></span><strong id="vimwiki-option-diary_caption_level">vimwiki-option-diary_caption_level</strong>
-<hr />
+*vimwiki-option-diary_caption_level*
+------------------------------------------------------------------------------
 Key                   Default value~
 diary_caption_level   0
-</p>
 
-<p>
 Description~
 Controls the presence of captions in the diary index linking to headers within
 the diary pages.
-</p>
 
-<p>
 Possible values:
 -1:  No headers are read from the diary page.
  0:  The first header from the diary page is used as the caption.
-</p>
-<blockquote>
-There are no sub-captions.
-</blockquote>
-<p>
+       There are no sub-captions.
  1:  Captions are created for headers of level 1 in the diary page.
  2:  Captions are created for headers up to level 2 in the diary page.
  etc.
-</p>
 
-<p>
 When the value is &gt;= 1, the primary caption of each diary page is set to the
 first header read from that page if it is the unique lowest-level header.
-</p>
 
-<p>
-<span id="-vimwiki-option-custom_wiki2html"></span><strong id="vimwiki-option-custom_wiki2html">vimwiki-option-custom_wiki2html</strong>
-<hr />
+*vimwiki-option-custom_wiki2html*
+------------------------------------------------------------------------------
 Key               Default value~
 custom_wiki2html  ''
-</p>
 
-<p>
 Description~
 The full path to a user-provided script that converts a wiki page to HTML.
 Vimwiki calls the provided |vimwiki-option-custom_wiki2html| script from the
 command-line, using |:!| invocation.
-</p>
 
-<p>
 The following arguments, in this order, are passed to the script:
-</p>
 
-<ol>
-<li>
-force : [0/1] overwrite an existing file
-
-<li>
-syntax : the syntax chosen for this wiki
-
-<li>
-extension : the file extension for this wiki
-
-<li>
-output_dir : the full path of the output directory
-
-<li>
-input_file : the full path of the wiki page
-
-<li>
-css_file : the full path of the css file for this wiki
-
-<li>
-template_path : the full path to the wiki's templates
-
-<li>
-template_default : the default template name
-
-<li>
-template_ext : the extension of template files
-
-<li>
-root_path : a count of ../ for pages buried in subdirs
-    For example, if you have wikilink <a href="dir1/dir2/dir3/my page in a subdir.html">dir1/dir2/dir3/my page in a subdir</a>
+1. force : [0/1] overwrite an existing file
+2. syntax : the syntax chosen for this wiki
+3. extension : the file extension for this wiki
+4. output_dir : the full path of the output directory
+5. input_file : the full path of the wiki page
+6. css_file : the full path of the css file for this wiki
+7. template_path : the full path to the wiki's templates
+8. template_default : the default template name
+9. template_ext : the extension of template files
+10. root_path : a count of ../ for pages buried in subdirs
+    For example, if you have wikilink [[dir1/dir2/dir3/my page in a subdir]]
     then this argument is '../../../'.
-
-<li>
-custom_args : custom arguments that will be passed to the conversion
+11. custom_args : custom arguments that will be passed to the conversion
     (can be defined in g:vimwiki_list as 'custom_wiki2html_args' parameter,
     see |vimwiki-option-custom_wiki2html_args|)
     script.
 
-</ol>
-
-<p>
 Options 7-11 are experimental and may change in the future.  If any of these
 parameters is empty, a hyphen "-" is passed to the script in its place.
-</p>
 
-<p>
 For an example and further instructions, refer to the following script:
-</p>
 
-<p>
   $VIMHOME/autoload/vimwiki/customwiki2html.sh
-</p>
 
-<p>
 An alternative converter was developed by Jason6Anderson, and can
-be located at <a href="https://github.com/vimwiki-backup/vimwiki/issues/384">https://github.com/vimwiki-backup/vimwiki/issues/384</a>
-</p>
+be located at https://github.com/vimwiki-backup/vimwiki/issues/384
 
-<p>
 To use the internal wiki2html converter, use an empty string (the default).
-</p>
 
 
-<p>
-<span id="-vimwiki-option-custom_wiki2html_args"></span><strong id="vimwiki-option-custom_wiki2html_args">vimwiki-option-custom_wiki2html_args</strong>
-<hr />
+*vimwiki-option-custom_wiki2html_args*
+-----------------------------------------------------------------------------
 Key                     Default value~
 custom_wiki2html_args   ''
-</p>
 
-<p>
 Description~
 If a custom script is called with |vimwiki-option-custom_wiki2html|, additional
 parameters can be passed using this option: &gt;
   let g:vimwiki_list = [{'path': '~/path/', 'custom_wiki2html_args': 'stuff'}]
-</p>
 
 
-<p>
-<span id="-vimwiki-option-list_margin"></span><strong id="vimwiki-option-list_margin">vimwiki-option-list_margin</strong>
-<hr />
+*vimwiki-option-list_margin*
+------------------------------------------------------------------------------
 Key               Default value~
 list_margin       -1 (0 for markdown)
-</p>
 
-<p>
 Description~
 Width of left-hand margin for lists.  When negative, the current 'shiftwidth'
 is used.  This affects the appearance of the generated links (see
@@ -643,108 +437,80 @@ behavior of the list manipulation commands |:VimwikiListChangeLevel| and the
 local mappings |vimwiki_glstar|, |vimwiki_gl#| |vimwiki_gl-|, |vimwiki_gl-|,
 |vimwiki_gl1|, |vimwiki_gla|, |vimwiki_glA|, |vimwiki_gli|, |vimwiki_glI| and
 |vimwiki_i_&lt;C-L&gt;_&lt;C-M&gt;|.
-</p>
 
-<p>
 Note: if you use Markdown or MediaWiki syntax, you probably would like to set
 this option to 0, because every indented line is considered verbatim text.
-</p>
 
 
-<p>
-<span id="-vimwiki-option-auto_tags"></span><strong id="vimwiki-option-auto_tags">vimwiki-option-auto_tags</strong>
-<hr />
+*vimwiki-option-auto_tags*
+------------------------------------------------------------------------------
 Key             Default value     Values~
 auto_tags       0                 0, 1
-</p>
 
-<p>
 Description~
 Set this option to 1 to automatically update the tags metadata when the
 current wiki page is saved: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'auto_tags': 1}]
-</p>
 
 
-<p>
-<span id="-vimwiki-option-auto_diary_index"></span><strong id="vimwiki-option-auto_diary_index">vimwiki-option-auto_diary_index</strong>
-<hr />
+*vimwiki-option-auto_diary_index*
+------------------------------------------------------------------------------
 Key               Default value     Values~
 auto_diary_index  0                 0, 1
-</p>
 
-<p>
 Description~
 Set this option to 1 to automatically update the diary index when opened.
 See |:VimwikiDiaryGenerateLinks|:  &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'auto_diary_index': 1}]
-</p>
 
 
-<p>
-<span id="-vimwiki-option-auto_generate_links"></span><strong id="vimwiki-option-auto_generate_links">vimwiki-option-auto_generate_links</strong>
-<hr />
+*vimwiki-option-auto_generate_links*
+------------------------------------------------------------------------------
 Key                  Default value     Values~
 auto_generate_links  0                 0, 1
-</p>
 
-<p>
 Description~
 Set this option to 1 to automatically update generated links when the
 current wiki page is saved: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'auto_generate_links': 1}]
-</p>
 
 
-<p>
-<span id="-vimwiki-option-auto_generate_tags"></span><strong id="vimwiki-option-auto_generate_tags">vimwiki-option-auto_generate_tags</strong>
-<hr />
+*vimwiki-option-auto_generate_tags*
+------------------------------------------------------------------------------
 Key                 Default value     Values~
 auto_generate_tags  0                 0, 1
-</p>
 
-<p>
 Description~
 Set this option to 1 to automatically update generated tags when the
 current wiki page is saved: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'auto_generate_tags': 1}]
-</p>
 
 
-<p>
-<span id="-vimwiki-option-exclude_files"></span><strong id="vimwiki-option-exclude_files">vimwiki-option-exclude_files</strong>
-<hr />
+*vimwiki-option-exclude_files*
+------------------------------------------------------------------------------
 Key             Default value     Values~
 exclude_files   []                list of file patterns to exclude
-</p>
 
-<p>
 Description~
 Set this option to a list of file patterns to exclude when checking or
 generating links: &gt;
   let g:vimwiki_list = [{'path': '~/my_site/', 'exclude_files': ['**/README.md']}]
-</p>
 
 
-<p>
-<span id="-vimwiki-option-html_filename_parameterization"></span><strong id="vimwiki-option-html_filename_parameterization">vimwiki-option-html_filename_parameterization</strong>
-<hr />
+*vimwiki-option-html_filename_parameterization*
+------------------------------------------------------------------------------
 Key                             Default value     Values~
 html_filename_parameterization  0                 0, 1
-</p>
 
-<p>
 Description~
 This setting is for integration with the vimwiki_markdown gem. If this is set
 to 1 it alters the check for generated html filenames to match what
 vimwiki_markdown generates. This means that it prevents unnecessary
 regeneration of HTML files.
-</p>
 
-<p>
 This setting also turns off the automatic deletion of files
 in the site_html directory which don't match existing wiki files.o
-</p>
+</pre>
 
 </body>
 </html>
