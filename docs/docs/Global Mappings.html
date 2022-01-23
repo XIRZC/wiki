@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>Global Mappings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<pre>
+------------------------------------------------------------------------------
+3.1. Global mappings                                 *vimwiki-global-mappings*
+
+Below is a list of all default global key mappings provided by Vimwiki. As
+global settings, they work in all vim sessions no matter what filetype you
+have open. Vimwiki respects pre-existing global mappings created by you or
+other plugins and will not overwrite them.
+
+If a conflict exists between Vimwiki and pre-existing maps or if you wish to
+customize these default mappings, you can remap them with: &gt;
+
+         :nmap {map} &lt;Plug&gt;{command}
+
+where
+        `{map}` is the new key sequence of your choosing
+        `{command}` is the Vimwiki command you are remapping
+
+So, for example, to remap the |:VimwikiIndex| mapping, you'd do something
+like: &gt;
+        :nmap &lt;Leader&gt;wx &lt;Plug&gt;VimwikiIndex
+
+Note that the recursive version of "map" command is needed to expand the right
+hand side to retrieve the &lt;Plug&gt; definition. "noremap" will not work. &lt;Plug&gt; is
+required and considered to be part of the command.
+
+You can also place remappings in your vimrc file, without the leading colon, of
+course.
+
+
+                                                          *vimwiki_&lt;Leader&gt;ww*
+[count]&lt;Leader&gt;ww
+        Open index file of the [count]'s wiki.
+
+        &lt;Leader&gt;ww opens the first wiki from |g:vimwiki_list| if no wiki is
+        open. Otherwise the index of the currently active wiki is opened.
+        1&lt;Leader&gt;ww opens the first wiki from |g:vimwiki_list|.
+        2&lt;Leader&gt;ww opens the second wiki from |g:vimwiki_list|.
+        3&lt;Leader&gt;ww opens the third wiki from |g:vimwiki_list|.
+        etc.
+
+        Remap command: `&lt;Plug&gt;VimwikiIndex`
+
+See also |:VimwikiIndex|
+
+
+                                                          *vimwiki_&lt;Leader&gt;wt*
+[count]&lt;Leader&gt;wt
+        Open index file of the [count]'s wiki in a new tab.
+
+        &lt;Leader&gt;wt tabopens the first wiki from |g:vimwiki_list|.
+        1&lt;Leader&gt;wt as above tabopens the first wiki from |g:vimwiki_list|.
+        2&lt;Leader&gt;wt tabopens the second wiki from |g:vimwiki_list|.
+        3&lt;Leader&gt;wt tabopens the third wiki from |g:vimwiki_list|.
+        etc.
+
+        Remap command: `&lt;Plug&gt;VimwikiTabIndex`
+
+See also |:VimwikiTabIndex|
+
+                                                          *vimwiki_&lt;Leader&gt;ws*
+&lt;Leader&gt;ws
+        List and select available wikis.
+
+        Remap command: `&lt;Plug&gt;VimwikiUISelect`
+
+See also |:VimwikiUISelect|
+
+                                                          *vimwiki_&lt;Leader&gt;wi*
+[count]&lt;Leader&gt;wi
+        Open diary index file of the [count]'s wiki.
+
+        &lt;Leader&gt;wi opens diary index file of the current wiki.
+        1&lt;Leader&gt;wi opens diary index file of the first wiki from
+        |g:vimwiki_list|.
+        2&lt;Leader&gt;wi opens diary index file of the second wiki from
+        |g:vimwiki_list|.
+        etc.
+
+        Remap command: `&lt;Plug&gt;VimwikiDiaryIndex`
+
+See also |:VimwikiDiaryIndex|
+
+                                                  *vimwiki_&lt;Leader&gt;w&lt;Leader&gt;w*
+[count]&lt;Leader&gt;w&lt;Leader&gt;w
+        Open diary wiki-file for today of the [count]'s wiki.
+
+        &lt;Leader&gt;w&lt;Leader&gt;w opens diary wiki-file for today in the current wiki
+        1&lt;Leader&gt;w&lt;Leader&gt;w opens diary wiki-file for today in the first wiki
+        from |g:vimwiki_list|.
+        2&lt;Leader&gt;w&lt;Leader&gt;w opens diary wiki-file for today in the second wiki
+        from |g:vimwiki_list|.
+        3&lt;Leader&gt;w&lt;Leader&gt;w opens diary wiki-file for today in the third wiki
+        from |g:vimwiki_list|.
+        etc.
+
+        Remap command: `&lt;Plug&gt;VimwikiMakeDiaryNote`
+
+See also |:VimwikiMakeDiaryNote|
+
+
+                                                  *vimwiki_&lt;Leader&gt;w&lt;Leader&gt;t*
+[count]&lt;Leader&gt;w&lt;Leader&gt;t
+        Open diary wiki-file for today of the [count]'s wiki in a new tab.
+
+        &lt;Leader&gt;w&lt;Leader&gt;t tabopens diary wiki-file for today in the current
+        wiki
+        1&lt;Leader&gt;w&lt;Leader&gt;t tabopens diary wiki-file for today in the
+        first wiki from |g:vimwiki_list|.
+        2&lt;Leader&gt;w&lt;Leader&gt;t tabopens diary wiki-file for today in the second
+        wiki from |g:vimwiki_list|.
+        3&lt;Leader&gt;w&lt;Leader&gt;t tabopens diary wiki-file for today in the third
+        wiki from |g:vimwiki_list|.
+        etc.
+
+        Remap command: `&lt;Plug&gt;VimwikiTabMakeDiaryNote`
+
+See also |:VimwikiTabMakeDiaryNote|
+
+
+                                                  *vimwiki_&lt;Leader&gt;w&lt;Leader&gt;y*
+[count]&lt;Leader&gt;w&lt;Leader&gt;y
+        Open diary wiki-file for yesterday of the [count]'s wiki.
+
+        &lt;Leader&gt;w&lt;Leader&gt;y opens diary wiki-file for yesterday in the current
+        wiki
+        1&lt;Leader&gt;w&lt;Leader&gt;y opens diary wiki-file for yesterday in the first
+        wiki from |g:vimwiki_list|.
+        2&lt;Leader&gt;w&lt;Leader&gt;y opens diary wiki-file for yesterday in the second
+        wiki from |g:vimwiki_list|.
+        3&lt;Leader&gt;w&lt;Leader&gt;y opens diary wiki-file for yesterday in the third
+        wiki from |g:vimwiki_list|.
+        etc.
+
+        Remap command: `&lt;Plug&gt;VimwikiMakeYesterdayDiaryNote`
+
+See also |:VimwikiMakeYesterdayDiaryNote|
+
+                                                  *vimwiki_&lt;Leader&gt;w&lt;Leader&gt;m*
+[count]&lt;Leader&gt;w&lt;Leader&gt;m
+        Open diary wiki-file for tomorrow of the [count]'s wiki.
+
+        &lt;Leader&gt;w&lt;Leader&gt;m opens diary wiki-file for tomorrow in the current
+        wiki
+        1&lt;Leader&gt;w&lt;Leader&gt;m opens diary wiki-file for tomorrow in the first
+        wiki from |g:vimwiki_list|.
+        2&lt;Leader&gt;w&lt;Leader&gt;m opens diary wiki-file for tomorrow in the second
+        wiki from |g:vimwiki_list|.
+        3&lt;Leader&gt;w&lt;Leader&gt;m opens diary wiki-file for tomorrow in the third
+        wiki from |g:vimwiki_list|.
+        etc.
+
+        Remap command: `&lt;Plug&gt;VimwikiMakeTomorrowDiaryNote`
+
+See also |:VimwikiMakeTomorrowDiaryNote|
+
+</pre>
+
+</body>
+</html>

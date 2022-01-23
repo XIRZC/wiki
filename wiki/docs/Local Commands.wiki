@@ -1,0 +1,187 @@
+{{{
+------------------------------------------------------------------------------
+4.2. Local commands                                   *vimwiki-local-commands*
+
+These commands are only available (and meaningful) when you are currently in a
+Vimwiki file.
+
+*:VimwikiFollowLink*
+    Follow wiki link (or create target wiki page if needed).
+
+*:VimwikiGoBackLink*
+    Go back to the wiki page you came from.
+
+*:VimwikiSplitLink* [reuse] [move_cursor]
+    Split and follow wiki link (create target wiki page if needed).
+
+    If the argument 'reuse' is given and nonzero, the link is opened in a
+    possibly existing split window instead of making a new split.
+
+    If 'move_cursor' is given and nonzero, the cursor moves to the window with
+    the opened link, otherwise, it stays in the window with the link.
+
+*:VimwikiVSplitLink* [reuse] [move_cursor]
+    Vertical split and follow wiki link (create target wiki page if needed).
+
+    If the argument 'reuse' is given and nonzero, the link is opened in a
+    possibly existing split window instead of making a new split.
+
+    If 'move_cursor' is given and nonzero, the cursor moves to the window with
+    the opened link, otherwise, it stays in the window with the link.
+
+*:VimwikiTabnewLink*
+    Follow wiki link in a new tab (create target wiki page if needed).
+
+*:VimwikiNextLink*
+    Find next link on the current page.
+
+*:VimwikiPrevLink*
+    Find previous link on the current page.
+
+*:VimwikiGoto*
+    Goto link provided by an argument. For example: >
+        :VimwikiGoto HelloWorld
+<    opens/creates HelloWorld wiki page.
+
+    Supports |cmdline-completion| for link name. If name is not specified, a
+    prompt will be shown.
+
+*:VimwikiDeleteFile*
+    Delete the wiki page you are in.
+
+*:VimwikiRenameFile*
+    Rename the wiki page you are in.
+
+*:VimwikiNextTask*
+    Jump to the next unfinished task in the current wiki page.
+
+*:Vimwiki2HTML*
+    Convert current wiki page to HTML using Vimwiki's own converter or a
+    user-supplied script (see |vimwiki-option-custom_wiki2html|).
+
+*:Vimwiki2HTMLBrowse*
+    Convert current wiki page to HTML and open it in the webbrowser.
+
+*:VimwikiAll2HTML[!]*
+    Convert all wiki pages to HTML.
+    Default CSS file (style.css) is created if there is no one.
+
+    By default, only converts wiki pages which have not already been
+    converted or have been modified since their last conversion. With !,
+    convert all pages, regardless of whether or not they are out-of-date.
+
+*:VimwikiToggleListItem*
+    Toggle checkbox of a list item on/off.
+    See |vimwiki-todo-lists|.
+
+*:VimwikiToggleRejectedListItem*
+    Toggle checkbox of a list item disabled/off.
+    See |vimwiki-todo-lists|.
+
+*:VimwikiListChangeLevel* CMD
+    Change the nesting level, or symbol, for a single-line list item.
+    CMD may be ">>" or "<<" to change the indentation of the item, or
+    one of the syntax-specific bullets: "*", "#", "1.", "-".
+    See |vimwiki-todo-lists|.
+
+*:VimwikiSearch* /pattern/
+*:VWS* /pattern/
+    Search for /pattern/ in all files of current wiki.
+    To display all matches use |:lopen| command.
+    To display next match use |:lnext| command.
+    To display previous match use |:lprevious| command.
+
+    Hint: this feature is simply a wrapper around |:lvimgrep|. For a
+    complete description of the search pattern format, see |:vimgrep|.
+    For example, to perform a case-insensitive search, use >
+    :VWS /\cpattern/
+
+*:VimwikiBacklinks*
+*:VWB*
+    Search for wikilinks to the current wiki page in all files of current
+    wiki.
+    To display all matches use |:lopen| command.
+    To display next match use |:lnext| command.
+    To display previous match use |:lprevious| command.
+
+
+*:VimwikiTable*
+    Create a table with 5 cols and 2 rows.
+
+    :VimwikiTable cols rows
+    Create a table with the given cols and rows
+
+    :VimwikiTable cols
+    Create a table with the given cols and 2 rows
+
+
+*:VimwikiTableMoveColumnLeft* , *:VimwikiTableMoveColumnRight*
+    Move current column to the left or to the right:
+    Example: >
+
+    | head1  | head2  | head3  | head4  | head5  |
+    |--------|--------|--------|--------|--------|
+    | value1 | value2 | value3 | value4 | value5 |
+
+
+    Cursor is on 'head1'.
+    :VimwikiTableMoveColumnRight
+
+    | head2  | head1  | head3  | head4  | head5  |
+    |--------|--------|--------|--------|--------|
+    | value2 | value1 | value3 | value4 | value5 |
+
+    Cursor is on 'head3'.
+    :VimwikiTableMoveColumnLeft
+
+    | head2  | head3  | head1  | head4  | head5  |
+    |--------|--------|--------|--------|--------|
+    | value2 | value3 | value1 | value4 | value5 |
+<
+
+    Commands are mapped to <A-Left> and <A-Right> respectively.
+
+
+*:VimwikiGenerateLinks* [pattern]
+    Insert a list of links to all available wiki files into the current buffer.
+    If an optional 'pattern' is given as argument, the files will be searched
+    in the wiki root folder according to the 'pattern' as |globpath|
+
+*:VimwikiDiaryGenerateLinks*
+    Delete old, insert new diary section into diary index file.
+
+*:VimwikiDiaryNextDay*
+    Open next day diary link if available.
+    Mapped to <C-Down>.
+
+*:VimwikiDiaryPrevDay*
+    Open previous day diary link if available.
+    Mapped to <C-Up>.
+
+*:VimwikiTOC*
+    Create or update the Table of Contents for the current wiki file.
+    See |vimwiki-toc|.
+
+*:VimwikiCheckLinks*
+    Search through all wiki files and check if the targets of all wiki links
+    and links to external files actually exist.  Check also if all wiki files
+    are reachable from the index file.  The results are shown in the quickfix
+    window.
+
+*:VimwikiRebuildTags*
+    Rebuilds the tags metadata file for all wiki files newer than the metadata
+    file.
+    Necessary for all tags related commands: |vimwiki-syntax-tags|.
+
+    :VimwikiRebuildTags! does the same for all files.
+
+*:VimwikiSearchTags*
+    Searches over the pages in current wiki and finds all locations of a given
+    tag.  Supports |cmdline-completion|.
+
+*:VimwikiGenerateTagLinks* tagname1 tagname2 ...
+    Creates or updates an overview on all tags of the wiki with links to all
+    their instances.  Supports |cmdline-completion|.  If no arguments (tags)
+    are specified, outputs all tags.  To make this command work properly, make
+    sure the tags have been built (see |vimwiki-build-tags|).
+  }}}

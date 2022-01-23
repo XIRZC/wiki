@@ -1,0 +1,10 @@
+{{{
+------------------------------------------------------------------------------
+5.10. Comments                                       *vimwiki-syntax-comments*
+
+A line that starts with %% is a comment.
+E.g.: >
+ %% this text would not be in HTML
+<
+
+  }}}

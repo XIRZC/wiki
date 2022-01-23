@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>Tables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<pre>
+------------------------------------------------------------------------------
+5.6. Tables                                            *vimwiki-syntax-tables*
+
+Tables are created by entering the content of each cell separated by |
+delimiters. You can insert other inline wiki syntax in table cells, including
+typeface formatting and links.
+For example: &gt;
+ | Year | Temperature (low) | Temperature (high) |
+ |------|-------------------|--------------------|
+ | 1900 | -10               | 25                 |
+ | 1910 | -15               | 30                 |
+ | 1920 | -10               | 32                 |
+ | 1930 | _N/A_             | _N/A_              |
+ | 1940 | -2                | 40                 |
+&gt;
+In HTML the following part &gt;
+ | Year | Temperatue (low) | Temperature (high) |
+ |------|-------------------|--------------------|
+&gt;
+is highlighted as a table header.
+
+If you indent a table then it will be centered in HTML.
+
+If you put &gt; in a cell, the cell spans the left column.
+If you put \/ in a cell, the cell spans the above row.
+For example: &gt;
+ | a  | b  | c | d |
+ | \/ | e  | &gt; | f |
+ | \/ | \/ | &gt; | g |
+ | h  | &gt;  | &gt; | &gt; |
+&gt;
+See |vimwiki-tables| for more details on how to manage tables.r
+</pre>
+
+</body>
+</html>

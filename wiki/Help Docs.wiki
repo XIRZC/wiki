@@ -1,0 +1,35 @@
+= Vimwiki Docs =
+
+*Here are Vimwiki Mappings, Commands, Syntax and Miscellaneous items.*
+
+==  Mappings ==
+
+1. [[docs/Global Mappings|Global Mappings]]
+2. [[docs/Local Mappings|Local Mappings]]
+3. [[docs/Text Objects|Text Objects]]
+
+==  Commands ==
+
+1. [[docs/Gloabl Commands|Gloabl Commands]]
+2. [[docs/Local Commands|Local Commands]]
+
+==  Syntax ==
+
+1. [[docs/Typefaces|Typefaces]]
+2. [[docs/Links|Links]]
+3. [[docs/Headers|Headers]]
+4. [[docs/Paragraphs|Paragraphs]]
+5. [[docs/Lists|Lists]]
+6. [[docs/Tables|Tables]]
+7. [[docs/Preformatted text|Preformatted text]]
+8. [[docs/Mathematical formulae|Mathematical formulae]]
+9. [[docs/Blockquotes|Blockquotes]]
+10. [[docs/Comments|Comments]]
+11. [[docs/Horizontal line|Horizontal line]]
+12. [[docs/Tags|Tags]]
+== Miscellaneous ==
+- [[docs/Folding|Folding]]
+- [[docs/Placeholders|Placeholders]]
+- [[docs/ListsExtra|ListsExtra]]
+- [[docs/TablesExtra|TablesExtra]]
+- [[docs/Diary|Diary]]

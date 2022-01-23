@@ -1,0 +1,13 @@
+{{{
+------------------------------------------------------------------------------
+5.4. Paragraphs                                    *vimwiki-syntax-paragraphs*
+
+A paragraph is a group of lines starting in column 1 (no indentation).
+Paragraphs are separated by a blank line:
+
+This is first paragraph
+with two lines.
+
+This is a second paragraph with
+two lines.
+  }}}

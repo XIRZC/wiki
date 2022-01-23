@@ -20,6 +20,7 @@ Checkout these pages for additional information and tips!
 - [[Tips and Snips]]
 - [[Related Tools]]
 - [[Troubleshooting]]
+- [[Help Docs]]
 
 == Chat/Forums ==
 

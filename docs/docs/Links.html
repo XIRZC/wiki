@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>Links</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<pre>
+------------------------------------------------------------------------------
+5.2. Links                                              *vimwiki-syntax-links*
+
+Wikilinks~
+
+Plain link: &gt;
+  [[This is a link]]
+With description: &gt;
+  [[This is a link source|Description of the link]]
+Wiki files don't need to be in the root directory of your wiki, you can put
+them in subdirectories as well: &gt;
+   [[projects/Important Project 1]]
+To jump from that file back to the index file, use this link: &gt;
+   [[../index]]
+or: &gt;
+   [[/index]]
+The latter works because wiki links starting with "/" are considered to be
+absolute to the wiki root directory, that is, the link [[/index]] always opens
+the file /path/to/your/wiki/index.wiki, no matter in which subdirectory you
+are curently in.
+
+Links to subdirectories inside the wiki directory are also supported. They
+end with a "/": &gt;
+  [[a subdirectory/|Other files]]
+Use |g:vimwiki_dir_link| to control the behavior when opening directories.
+
+Typing wikilinks can be simplified by using Vim's omni completion (see
+|compl-omni|) like so: &gt;
+  [[ind&lt;C-X&gt;&lt;C-O&gt;
+which opens up a popup menu with all the wiki files starting with "ind".
+
+When |vimwiki-option-maxhi| equals 1, a distinct highlighting style is used to
+identify wikilinks whose targets are not found.
+
+Interwiki~
+
+If you maintain more than one wiki, you can create interwiki links between
+them by adding a numbered prefix "wikiX:" in front of a link: &gt;
+  [[wiki1:This is a link]]
+or: &gt;
+  [[wiki1:This is a link source|Description of the link]]
+The number behind "wiki" is in the range 0..N-1 and identifies the destination
+wiki in |g:vimwiki_list|.
+
+Named interwiki links are also supported in the format "wn.name:link" &gt;
+  [[wn.My Name:This is a link]]
+or: &gt;
+  [[wn.MyWiki:This is a link source|Description of the link]]
+See |vimwiki-option-name| to set a per wiki name.
+
+Diary~
+
+The "diary:" scheme is used to link to diary entries: &gt;
+  [[diary:2012-03-05]]
+Anchors~
+
+A wikilink, interwiki link or diary link can be followed by a '#' and the name
+of an anchor.  When opening a link, the cursor jumps to the anchor. &gt;
+  [[Todo List#Tomorrow|Tasks for tomorrow]]
+To jump inside the current wiki file you can omit the file: &gt;
+  [[#Tomorrow]]
+See |vimwiki-anchors| for how to set an anchor.
+
+Raw URLs~
+
+Raw URLs are also supported: &gt;
+  https://github.com/vimwiki/vimwiki.git
+  mailto:habamax@gmail.com
+  ftp://vim.org
+External files~
+
+The "file:" and "local:" schemes allow you to directly link to arbitrary
+resources using absolute or relative paths: &gt;
+  [[file:/home/somebody/a/b/c/music.mp3]]
+  [[file:C:/Users/somebody/d/e/f/music.mp3]]
+  [[file:~/a/b/c/music.mp3]]
+  [[file:../assets/data.csv|Important Data]]
+  [[local:C:/Users/somebody/d/e/f/music.mp3]]
+  [[file:/home/user/documents/|Link to a directory]]
+These links are opened with the system command, i.e. !xdg-open (Linux), !open
+(Mac), or !start (Windows).  To customize this behavior, see
+|VimwikiLinkHandler|.
+
+In Vim, "file:" and "local:" behave the same, i.e. you can use them with both
+relative and absolute links. When converted to HTML, however, "file:" links
+will become absolute links, while "local:" links become relative to the HTML
+output directory. The latter can be useful if you copy your HTML files to
+another computer.
+To customize the HTML conversion of links, see |VimwikiLinkConverter|.
+
+Transclusion (Wiki-Include) Links~
+
+Links that use "{{" and "}}" delimiters signify content that is to be
+included into the HTML output, rather than referenced via hyperlink.
+
+Wiki-include URLs may use any of the supported schemes, may be absolute or
+relative, and need not end with an extension.
+
+The primary purpose for wiki-include links is to include images.
+
+Transclude from a local URL: &gt;
+  {{file:../../images/vimwiki_logo.png}}
+or from a universal URL: &gt;
+  {{http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png}}
+Transclude image with alternate text: &gt;
+  {{http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png|Vimwiki}}
+in HTML: &gt;
+  &lt;img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png"
+  alt="Vimwiki"/&gt;
+Transclude image with alternate text and some style: &gt;
+  {{http://.../vimwiki_logo.png|cool stuff|style="width:150px;height:120px;"}}
+in HTML: &gt;
+  &lt;img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png"
+  alt="cool stuff" style="width:150px; height:120px"/&gt;
+Transclude image _without_ alternate text and with a CSS class: &gt;
+  {{http://.../vimwiki_logo.png||class="center flow blabla"}}
+in HTML: &gt;
+  &lt;img src="http://vimwiki.googlecode.com/hg/images/vimwiki_logo.png"
+  alt="" class="center flow blabla"/&gt;
+A trial feature allows you to supply your own handler for wiki-include links.
+See |VimwikiWikiIncludeHandler|.
+
+Thumbnail links~
+&gt;
+Thumbnail links are constructed like this: &gt;
+  [[http://someaddr.com/bigpicture.jpg|{{http://someaddr.com/thumbnail.jpg}}]]
+in HTML: &gt;
+  &lt;a href="http://someaddr.com/ ... /.jpg"&gt;
+  &lt;img src="http://../thumbnail.jpg /&gt;&lt;/a&gt;
+Markdown Links~
+
+These links are only available for Markdown syntax.  See
+http://daringfireball.net/projects/markdown/syntax#link.
+
+Inline link: &gt;
+  [Looks like this](URL)
+Image link: &gt;
+  ![Looks like this](URL)
+Reference-style links: &gt;
+  a) [Link Name][Id]
+  b) [Id][], using the "implicit link name" shortcut
+Reference style links must always include two consecutive pairs of
+[-brackets, and field entries can not use "[" or "]".
+
+
+NOTE: (in Vimwiki's current implementation) Reference-style links are a hybrid
+of Vimwiki's default "Wikilink" and the tradition reference-style link.
+
+If the Id is defined elsewhere in the source, as per the Markdown standard: &gt;
+  [Id]: URL
+then the URL is opened with the system default handler.  Otherwise, Vimwiki
+treats the reference-style link as a Wikilink, interpreting the Id field as a
+wiki page name.
+
+Highlighting of existing links when |vimwiki-option-maxhi| is activated
+identifies links whose Id field is not defined, either as a reference-link or
+as a wiki page.
+
+To scan the page for new or changed definitions for reference-links, simply
+re-open the page ":e&lt;CR&gt;".r
+</pre>
+
+</body>
+</html>

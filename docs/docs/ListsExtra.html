@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>ListsExtra</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<pre>
+==============================================================================
+8. Lists                                                       *vimwiki-lists*
+
+While writing lists, the keys &lt;CR&gt;, o and O insert new bullets or numbers as
+you would expect it. A new bullet/number is inserted if and only if the cursor
+is in a list item. If you use hard line wraps within your lists then you will
+need to remap `&lt;CR&gt;` to `VimwikiReturn 3 5`, use &lt;S-CR&gt;, or press &lt;CR&gt; and
+&lt;C-L&gt;&lt;C-M&gt;.
+
+Note that the mapping &lt;S-CR&gt; is not available in all terminals.
+
+Furthermore, &lt;CR&gt; and &lt;S-CR&gt; behave differently when the cursor is behind an
+empty list item. See the table below.
+
+To customize the behavior you should use an autocmd or place the mappings in
+`~/.vim/after/ftpluginvimwiki.vim`. This is necessary to avoid an error that
+the command `VimwikiReturn` doesn't exist when editing non Vimwiki files.: &gt;
+  autocmd FileType vimwiki inoremap &lt;silent&gt;&lt;buffer&gt; &lt;CR&gt;
+              \ &lt;C-]&gt;&lt;Esc&gt;:VimwikiReturn 3 5&lt;CR&gt;
+  autocmd FileType vimwiki inoremap &lt;silent&gt;&lt;buffer&gt; &lt;S-CR&gt;
+              \ &lt;Esc&gt;:VimwikiReturn 2 2&lt;CR&gt;
+Note: Prefixing the mapping with `&lt;C-]&gt;` expands iabbrev definitions and
+requires Vim &gt; 7.3.489.
+
+
+The first argument of the command :VimwikiReturn is a number that specifies
+when to insert a new bullet/number and when not, depending on whether the
+cursor is in a list item or in a normal line: &gt;
+
+ Number │     Before     │    After
+ ======================================
+    1   │ 1. item|       │ 1. item
+        │                │ 2. |
+        │––––––––––––––––––––––––––––––       ← default for &lt;CR&gt;
+        │ 1. item        │ 1. item
+        │    continue|   │    continue
+        │                │    |
+ ======================================
+    2   │ 1. item|       │ 1. item
+        │                │    |
+        │––––––––––––––––––––––––––––––       ← default for &lt;S-CR&gt;
+        │ 1. item        │ 1. item
+        │    continue|   │    continue
+        │                │ 2. |
+ ======================================
+    3   │ 1. item|       │ 1. item
+        │                │ 2. |
+        │––––––––––––––––––––––––––––––
+        │ 1. item        │ 1. item
+        │    continue|   │    continue
+        │                │ 2. |
+ ======================================
+    4   │ 1. item|       │ 1. item
+        │                │    |
+        │––––––––––––––––––––––––––––––
+        │ 1. item        │ 1. item
+        │    continue|   │    continue
+        │                │    |
+&lt;
+
+The second argument is a number that specifies what should happen when you
+press &lt;CR&gt; or &lt;S-CR&gt; behind an empty list item. There are no less than five
+possibilities:
+&gt;
+ Number │     Before     │    After
+ ======================================
+    1   │ 1. |           │ 1.
+        │                │ 2. |
+ ======================================
+    2   │ 1. |           │                    ← default for &lt;S-CR&gt;
+        │                │ 1. |
+ ======================================
+    3   │ 1. |           │ |
+        │                │
+ ======================================
+    4   │ 1. |           │
+        │                │ |
+ ======================================
+    5   │     1. |       │ 1. |
+        │                │
+        │––––––––––––––––––––––––––––––       ← default for &lt;CR&gt;
+        │ 1. |           │ |
+        │                │
+&lt;
+
+                                                   *vimwiki-list-manipulation*
+The level of a list item is determined by its indentation (default and
+Markdown syntax) or by the number of list symbols (MediaWiki syntax).
+
+Use gll and glh in normal mode to increase or decrease the level of a list
+item. The symbols are adjusted automatically to the list items around it.
+Use gLl and gLh to increase or decrease the level of a list item plus all
+list items of lower level below it, that is, all child items.
+
+Use &lt;C-T&gt; and &lt;C-D&gt; to change the level of a list item in insert mode.
+
+See |vimwiki_gll|, |vimwiki_gLl|, |vimwiki_glh|, |vimwiki_gLh|,
+|vimwiki_i_&lt;C-T&gt;|, |vimwiki_i_&lt;C-D&gt;|
+
+
+Use gl followed by the desired symbol to change the symbol of a list item or
+create one. Type gL and the symbol to change all items of the current list.
+For default syntax, the following types are available: &gt;
+    - hyphen
+    * asterisk
+    # hash
+    1. number with period
+    1) number with parenthesis
+    a) lower-case letter with parenthesis
+    A) upper-case letter with parenthesis
+    i) lower-case Roman numerals with parenthesis
+    I) upper-case Roman numerals with parenthesis
+Markdown syntax has the following types: &gt;
+    - hyphen
+    * asterisk
+    + plus
+    1. number with period
+MediaWiki syntax only has: &gt;
+    * asterisk
+    # hash
+In insert mode, use the keys &lt;C-L&gt;&lt;C-J&gt; and &lt;C-L&gt;&lt;C-K&gt; to switch between
+symbols. For convenience, only the commonly used symbols can be reached
+through these keys for default syntax.
+
+Note that such a list: a) b) c) ‚Äö√Ñ¬∂ only goes up to zz), to avoid confusion with
+normal text followed by a parenthesis.
+Roman numerals go up to MMMM) and numbers up to 2147483647. or
+9223372036854775807. depending if your Vim is 32 or 64 bit.
+
+Also, note that you can, of course, mix different list symbols in one list, but
+if you have the strange idea of putting a list with Roman numerals right after
+a list using letters or vice versa, Vimwiki will get confused because it
+cannot distinguish which is which (at least if the types are both upper case
+or both lower case).
+
+See |vimwiki_glstar|, |vimwiki_gl#| |vimwiki_gl-|, |vimwiki_gl-|,
+|vimwiki_gl1|, |vimwiki_gla|, |vimwiki_glA|, |vimwiki_gli|, |vimwiki_glI|
+
+
+Use glr and gLr if the numbers of a numbered list are mixed up. See
+|vimwiki_glr| and |vimwiki_gLr|.
+
+
+------------------------------------------------------------------------------
+Todo lists                                                *vimwiki-todo-lists*
+
+You can have todo lists -- lists of items you can check/uncheck.
+
+Consider the following example: &gt;
+ = Toggleable list of todo items =
+   * [X] Toggle list item on/off.
+     * [X] Simple toggling between [ ] and [X].
+     * [X] All list's subitems should be toggled on/off appropriately.
+     * [X] Toggle child subitems only if current line is list item
+     * [X] Parent list item should be toggled depending on its child items.
+   * [X] Make numbered list items toggleable too
+   * [X] Add highlighting to list item boxes
+   * [X] Add [ ] to the next list item created with o, O and &lt;CR&gt;.
+Pressing &lt;C-Space&gt; on the first list item will toggle it and all of its child
+items: &gt;
+ = Toggleable list of todo items =
+   * [ ] Toggle list item on/off.
+     * [ ] Simple toggling between [ ] and [X].
+     * [ ] All of a list's subitems should be toggled on/off appropriately.
+     * [ ] Toggle child subitems only if the current line is a list item.
+     * [ ] Parent list item should be toggled depending on their child items.
+   * [X] Make numbered list items toggleable too.
+   * [X] Add highlighting to list item boxes.
+   * [X] Add [ ] to the next list item created using o, O or &lt;CR&gt;.
+Pressing &lt;C-Space&gt; on the third list item will toggle it and adjust all of its
+parent items: &gt;
+ = Toggleable list of todo items =
+   * [.] Toggle list item on/off.
+     * [ ] Simple toggling between [ ] and [X].
+     * [X] All of a list's subitems should be toggled on/off appropriately.
+     * [ ] Toggle child subitems only if current line is list item.
+     * [ ] Parent list item should be toggled depending on its child items.
+   * [ ] Make numbered list items toggleable too.
+   * [ ] Add highlighting to list item boxes.
+   * [ ] Add [ ] to the next list item created using o, O or &lt;CR&gt;.
+Parent items should change when their child items change. If not, use
+|vimwiki_glr|. The symbol between [ ] depends on the percentage of toggled
+child items (see also |g:vimwiki_listsyms|): &gt;
+    [ ] -- 0%
+    [.] -- 1-33%
+    [o] -- 34-66%
+    [O] -- 67-99%
+    [X] -- 100%
+You can use |vimwiki_gln| and |vimwiki_glp| to change the "done" status of a
+checkbox without a childitem.
+
+It is possible to toggle several list items using visual mode. But note that
+instead of toggling every item individually, all items get checked if the
+first item was unchecked and all items get unchecked if the first item was
+checked.
+
+Use gl&lt;Space&gt; (see |vimwiki_gl&lt;Space&gt;|) to remove a single checkbox and
+gL&lt;Space&gt; (see |vimwiki_gL&lt;Space&gt;|) to remove all checkboxes of the list the
+cursor is in.
+
+You can mark an item as rejected ("won't do") with
+|vimwiki_glx|. A rejected item will not influence the status of its parents./
+
+</pre>
+
+</body>
+</html>

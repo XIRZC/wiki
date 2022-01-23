@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>Preformatted text</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+<hr />
+<p>
+5.7. Preformatted text                           <span id="-vimwiki-syntax-preformatted"></span><strong id="vimwiki-syntax-preformatted">vimwiki-syntax-preformatted</strong>
+</p>
+
+<p>
+Use <img src="../../wiki/{ and " />} to define a block of preformatted text:
+</p>
+<pre  &gt;>
+  Tyger! Tyger! burning bright
+   In the forests of the night,
+    What immortal hand or eye
+     Could frame thy fearful symmetry?
+  In what distant deeps or skies
+   Burnt the fire of thine eyes?
+    On what wings dare he aspire?
+     What the hand dare sieze the fire?
+</pre>
+
+
+<p>
+You can add optional information after the {{{: &gt;
+</p>
+<pre class="brush: python" &gt;>
+ def hello(world):
+     for x in range(10):
+         print("Hello {0} number {1}".format(world, x))
+</pre>
+
+<p>
+Result of HTML export: &gt;
+ &lt;pre class="brush: python"&gt;
+ def hello(world):
+</p>
+<blockquote>
+fo x in range(10):
+print("Hello {0} number {1}".format(world, x))
+</blockquote>
+<p>
+ &lt;/pre&gt;
+This might be useful for coloring program code with external JS tools
+such as Google's syntax highlighter.
+</p>
+
+<p>
+You can setup Vimwiki to highlight code snippets in preformatted text.
+See |vimwiki-option-nested_syntaxes| and
+|vimwiki-option-automatic_nested_syntaxes|.r
+</p>
+
+</body>
+</html>

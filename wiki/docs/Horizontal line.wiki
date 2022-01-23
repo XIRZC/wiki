@@ -1,0 +1,8 @@
+{{{
+------------------------------------------------------------------------------
+5.11. Horizontal line                                      *vimwiki-syntax-hr*
+
+4 or more dashes at the start of the line is a horizontal line (<hr />): >
+ ----
+<
+  }}}

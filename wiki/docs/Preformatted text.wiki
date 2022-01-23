@@ -1,0 +1,36 @@
+
+------------------------------------------------------------------------------
+5.7. Preformatted text                           *vimwiki-syntax-preformatted*
+
+Use {{{ and }}} to define a block of preformatted text:
+{{{ >
+  Tyger! Tyger! burning bright
+   In the forests of the night,
+    What immortal hand or eye
+     Could frame thy fearful symmetry?
+  In what distant deeps or skies
+   Burnt the fire of thine eyes?
+    On what wings dare he aspire?
+     What the hand dare sieze the fire?
+}}}
+
+
+You can add optional information after the {{{: >
+{{{class="brush: python" >
+ def hello(world):
+     for x in range(10):
+         print("Hello {0} number {1}".format(world, x))
+}}}
+
+Result of HTML export: >
+ <pre class="brush: python">
+ def hello(world):
+     fo x in range(10):
+         print("Hello {0} number {1}".format(world, x))
+ </pre>
+This might be useful for coloring program code with external JS tools
+such as Google's syntax highlighter.
+
+You can setup Vimwiki to highlight code snippets in preformatted text.
+See |vimwiki-option-nested_syntaxes| and
+|vimwiki-option-automatic_nested_syntaxes|.r

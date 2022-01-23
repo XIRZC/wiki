@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>TablesExtra</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<pre>
+==============================================================================
+9. Tables                                                     *vimwiki-tables*
+
+Use the  :VimwikiTable command to create a default table with 5 columns and 2
+rows: &gt;
+ |   |   |   |   |   |
+ |---|---|---|---|---|
+ |   |   |   |   |   |
+&lt;
+
+Tables are auto-formattable. Let's add some text into first cell: &gt;
+ | First Name  |   |   |   |   |
+ |---|---|---|---|---|
+ |   |   |   |   |   |
+&lt;
+
+Whenever you press &lt;TAB&gt;, &lt;CR&gt; or leave Insert mode, the table is formatted: &gt;
+ | First Name |   |   |   |   |
+ |------------|---|---|---|---|
+ |            |   |   |   |   |
+&lt;
+
+You can easily create nice-looking text tables, just press &lt;TAB&gt; and enter new
+values: &gt;
+ | First Name | Last Name  Age | City     | e-mail               |
+ |------------|------------|-----|----------|----------------------|
+ | Vladislav  | Pokrishkin | 31  | Moscow   | vlad_pok@smail.com   |
+ | James      | Esfandiary | 27  | Istanbul | esfandiary@tmail.com |
+&lt;
+
+To indent table indent the first row. Then format it with 'gqq'.
+
+You can specify the type of horizontal alignment for columns in the separator
+using the ':' character. The default is left-align.  &gt;
+ | Date       |  Item  |   Price |
+ |------------|:------:|--------:|
+ | yest       | Coffee |  $15.00 |
+ | 2017-02-13 |  Tea   |   $2.10 |
+ | 2017-03-14 |  Cake  | $143.12 |
+&lt;|
+
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>Tags</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<pre>
+------------------------------------------------------------------------------
+5.12. Tags                                               *vimwiki-syntax-tags*
+
+You can tag a wiki file, a header or an arbitrary place in a wiki file. Then,
+you can use Vim's built-in tag search functionality (see |tagsrch.txt|) or
+Vimwiki's tag related commands to quickly jump to all occurrences of the tag.
+
+A tag is a sequence of non-space characters between two colons: &gt;
+        :tag-example:
+&lt;
+It is allowed to concatenate multiple tags in one line: &gt;
+        :tag-one:tag-two:
+&lt;
+If placed in the first two lines of a file, the whole file is tagged.  If
+placed under a header, within the 2 lines below it, the header is then tagged
+with this tag, and the tag search commandswill jump to this specific header.
+Otherwise, the tag stands of its own and the search command jumps directly to
+it.
+
+Typing tags can be simplified by using Vim's omni completion (see
+|compl-omni|) like so: &gt;
+  :ind&lt;C-X&gt;&lt;C-O&gt;
+which opens up a popup menu with all tags defined in the wiki starting with
+"ind".
+
+Tags are also treated as |vimwiki-anchors| (similar to bold text).
+
+                                                          *vimwiki-build-tags*
+Note that the tag search/jump/completion commands need certain metadata saved
+in the wiki folder.  This metadata file can be manually updated by running
+|:VimwikiRebuildTags|.  When the option |vimwiki-option-auto_tags| is enabled,
+the tags metadata will be auto-updated on each page save.
+
+
+Tags-related commands and options:
+   * |:VimwikiRebuildTags|
+   * |:VimwikiGenerateTagLinks|
+   * |:VimwikiSearchTags|
+   * |vimwiki-option-auto_tags|
+ 
+</pre>
+
+</body>
+</html>

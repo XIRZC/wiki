@@ -1,0 +1,52 @@
+{{{
+------------------------------------------------------------------------------
+3.3. Text objects                                       *vimwiki-text-objects*
+
+ah                      A header including its content up to the next header.
+ih                      The content under a header (like 'ah', but excluding
+                        the header itself and trailing empty lines).
+
+aH                      A header including all of its subheaders. When [count]
+                        is 2, include the parent header, when [count] is 3,
+                        the grandparent and so on.
+iH                      Like 'aH', but excluding the header itself and
+                        trailing empty lines.
+
+Examples:
+- type 'cih' to change the content under the current header
+- 'daH' deletes an entire header plus its content including the content of all
+  of its subheaders
+- 'v2aH' selects the parent header of the header the cursor is under plus all
+  of the content of all of its subheaders
+
+a\                      A cell in a table.
+i\                      An inner cell in a table.
+ac                      A column in a table.
+ic                      An inner column in a table.
+
+al                      A list item plus its children.
+il                      A single list item.
+
+These key mappings can be modified by replacing the default keys: >
+
+  omap ah <Plug>VimwikiTextObjHeader
+  vmap ah <Plug>VimwikiTextObjHeaderV
+  omap ih <Plug>VimwikiTextObjHeaderContent
+  vmap ih <Plug>VimwikiTextObjHeaderContentV
+  omap aH <Plug>VimwikiTextObjHeaderSub
+  vmap aH <Plug>VimwikiTextObjHeaderSubV
+  omap iH <Plug>VimwikiTextObjHeaderSubContent
+  vmap iH <Plug>VimwikiTextObjHeaderSubContentV
+  omap a\ <Plug>VimwikiTextObjTableCell
+  vmap a\ <Plug>VimwikiTextObjTableCellV
+  omap i\ <Plug>VimwikiTextObjTableCellInner
+  vmap i\ <Plug>VimwikiTextObjTableCellInnerV
+  omap ac <Plug>VimwikiTextObjColumn
+  vmap ac <Plug>VimwikiTextObjColumnV
+  omap ic <Plug>VimwikiTextObjColumnInner
+  vmap ic <Plug>VimwikiTextObjColumnInnerV
+  omap al <Plug>VimwikiTextObjListChildren
+  vmap al <Plug>VimwikiTextObjListChildrenV
+  omap il <Plug>VimwikiTextObjListSingle
+  vmap il <Plug>VimwikiTextObjListSingleV
+}}}
