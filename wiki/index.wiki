@@ -1,3 +1,4 @@
+%title Vimwiki Wiki
 = Vimwiki Wiki =
 
 *Welcome to the Vimwiki wiki!*
