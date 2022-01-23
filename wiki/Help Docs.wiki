@@ -1,6 +1,6 @@
 = Vimwiki Docs =
 
-*Here are Vimwiki Mappings, Commands, Syntax and Miscellaneous items.*
+*Here are Vimwiki Mappings, Commands, Syntax, Options and Miscellaneous items.*
 
 ==  Mappings ==
 
