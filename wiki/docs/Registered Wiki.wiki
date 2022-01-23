@@ -1,0 +1,61 @@
+=============================================================================
+12. Options                                                  *vimwiki-options*
+
+There are global options and local (per-wiki) options available to tune
+Vimwiki.
+
+Global options are configured via global variables.  For a complete list of
+them, see |vimwiki-global-options|.
+
+Local options for multiple independent wikis are stored in a single global
+variable |g:vimwiki_list|.  The per-wiki options can be registered in advance,
+as described in |vimwiki-register-wiki|, or may be registered on the fly as
+described in |vimwiki-temporary-wiki|.  For a list of per-wiki options, see
+|vimwiki-local-options|.
+
+A note for Vim power users:
+If you have an elaborated Vim setup, where you e.g. load plugins
+conditionally, make sure the settings are set before Vimwiki loads (that is,
+before plugin/vimwiki.vim is sourced). If this is not possible, try this
+command after the Vimwiki settings are (re-) set: >
+  :call vimwiki#vars#init()
+
+------------------------------------------------------------------------------
+12.1 Registered Wiki                  *g:vimwiki_list* *vimwiki-register-wiki*
+
+One or more wikis can be registered using the |g:vimwiki_list| variable.
+
+Each item in |g:vimwiki_list| is a |Dictionary| that holds all customizations
+available for a distinct wiki. The options dictionary has the form: >
+  {'option1': 'value1', 'option2': 'value2', ...}
+
+Consider the following: >
+  let g:vimwiki_list = [{'path': '~/my_site/', 'path_html': '~/public_html/'}]
+
+This defines one wiki located at ~/my_site/. When converted to HTML, the
+produced HTML files go to ~/public_html/ .
+
+Another example: >
+  let g:vimwiki_list = [{'path': '~/my_site/', 'path_html': '~/public_html/'},
+            \ {'path': '~/my_docs/', 'ext': '.mdox'}]
+
+defines two wikis: the first as before, and the second one located in
+~/my_docs/, with files that have the .mdox extension.
+
+An empty |Dictionary| in g:vimwiki_list is the wiki with default options: >
+  let g:vimwiki_list = [{},
+            \ {'path': '~/my_docs/', 'ext': '.mdox'}]
+
+For clarity, in your .vimrc file you can define wiki options using separate
+|Dictionary| variables and subsequently compose them into |g:vimwiki_list|. >
+    let wiki_1 = {}
+    let wiki_1.path = '~/my_docs/'
+    let wiki_1.html_template = '~/public_html/template.tpl'
+    let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+
+    let wiki_2 = {}
+    let wiki_2.path = '~/project_docs/'
+    let wiki_2.index = 'main'
+
+    let g:vimwiki_list = [wiki_1, wiki_2]
+<

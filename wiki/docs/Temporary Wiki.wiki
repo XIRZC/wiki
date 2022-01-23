@@ -1,0 +1,26 @@
+{{{
+------------------------------------------------------------------------------
+12.2 Temporary Wiki                                   *vimwiki-temporary-wiki*
+
+
+The creation of temporary wikis allows you to create a wiki on the fly.
+
+If a file with a registered wiki extension (see |vimwiki-register-extension|)
+is opened in a directory that: 1) is not listed in |g:vimwiki_list|, and 2) is
+not a subdirectory of any such directory, then a temporary wiki is created and
+appended to the list of configured wikis in |g:vimwiki_list|.
+
+In addition to Vimwiki's editing functionality, the temporary wiki enables: 1)
+wiki-linking to other files in the same subtree, 2) highlighting of existing
+wiki pages when |vimwiki-option-maxhi| is activated, and 3) HTML generation to
+|vimwiki-option-path_html|.
+
+Temporary wikis are configured using default |vimwiki-local-options|, except
+for the path, extension, and syntax options.  The path and extension are set
+using the file's location and extension.  The syntax is set to Vimwiki's
+default unless another syntax is registered via |vimwiki-register-extension|.
+
+Use |g:vimwiki_global_ext| to turn off creation of temporary wikis.
+
+NOTE: Vimwiki assumes that the locations of distinct wikis do not overlap.
+}}}

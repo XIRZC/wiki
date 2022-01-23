@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="../style.css">
+<title>Registered Wiki</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<p>
+=============================================================================
+</p>
+<ol>
+<li>
+Options                                                  <span id="-vimwiki-options"></span><strong id="vimwiki-options">vimwiki-options</strong>
+
+</ol>
+
+<p>
+There are global options and local (per-wiki) options available to tune
+Vimwiki.
+</p>
+
+<p>
+Global options are configured via global variables.  For a complete list of
+them, see |vimwiki-global-options|.
+</p>
+
+<p>
+Local options for multiple independent wikis are stored in a single global
+variable |g:vimwiki_list|.  The per-wiki options can be registered in advance,
+as described in |vimwiki-register-wiki|, or may be registered on the fly as
+described in |vimwiki-temporary-wiki|.  For a list of per-wiki options, see
+|vimwiki-local-options|.
+</p>
+
+<p>
+A note for Vim power users:
+If you have an elaborated Vim setup, where you e.g. load plugins
+conditionally, make sure the settings are set before Vimwiki loads (that is,
+before plugin/vimwiki.vim is sourced). If this is not possible, try this
+command after the Vimwiki settings are (re-) set: &gt;
+  :call vimwiki#vars#init()
+</p>
+
+<hr />
+<p>
+12.1 Registered Wiki                  <span id="-g:vimwiki_list"></span><strong id="g:vimwiki_list">g:vimwiki_list</strong> <span id="-vimwiki-register-wiki"></span><strong id="vimwiki-register-wiki">vimwiki-register-wiki</strong>
+</p>
+
+<p>
+One or more wikis can be registered using the |g:vimwiki_list| variable.
+</p>
+
+<p>
+Each item in |g:vimwiki_list| is a |Dictionary| that holds all customizations
+available for a distinct wiki. The options dictionary has the form: &gt;
+  {'option1': 'value1', 'option2': 'value2', ...}
+</p>
+
+<p>
+Consider the following: &gt;
+  let g:vimwiki_list = [{'path': '~/my_site/', 'path_html': '~/public_html/'}]
+</p>
+
+<p>
+This defines one wiki located at ~/my_site/. When converted to HTML, the
+produced HTML files go to ~/public_html/ .
+</p>
+
+<p>
+Another example: &gt;
+  let g:vimwiki_list = [{'path': '~/my_site/', 'path_html': '~/public_html/'},
+</p>
+<blockquote>
+\ {'path': '~/my_docs/', 'ext': '.mdox'}]
+</blockquote>
+
+<p>
+defines two wikis: the first as before, and the second one located in
+~/my_docs/, with files that have the .mdox extension.
+</p>
+
+<p>
+An empty |Dictionary| in g:vimwiki_list is the wiki with default options: &gt;
+  let g:vimwiki_list = [{},
+</p>
+<blockquote>
+\ {'path': '~/my_docs/', 'ext': '.mdox'}]
+</blockquote>
+
+<p>
+For clarity, in your .vimrc file you can define wiki options using separate
+|Dictionary| variables and subsequently compose them into |g:vimwiki_list|. &gt;
+</p>
+<blockquote>
+let wiki_1 = {}
+let wiki_1.path = '~/my_docs/'
+let wiki_1.html_template = '~/public_html/template.tpl'
+let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+</blockquote>
+<blockquote>
+let wiki_2 = {}
+let wiki_2.path = '~/project_docs/'
+let wiki_2.index = 'main'
+</blockquote>
+<blockquote>
+let g:vimwiki_list = [wiki_1, wiki_2]
+</blockquote>
+<p>
+&lt;
+</p>
+
+</body>
+</html>

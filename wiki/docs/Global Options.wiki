@@ -1,0 +1,819 @@
+------------------------------------------------------------------------------
+12.4 Global Options                                   *vimwiki-global-options*
+
+
+Global options are configured using the following pattern: >
+
+    let g:option_name = option_value
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_hl_headers*
+
+Highlight headers with =Reddish=, ==Greenish==, ===Blueish=== colors.
+
+Value           Description~
+1               Use VimwikiHeader1 - VimwikiHeader6 group colors to highlight
+                different header levels.
+0               Use |hl-Title| color for headers.
+Default: 0
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_hl_cb_checked*
+
+Highlight checked list items with a special color:
+
+  * [X] the whole line can be highlighted with the option set to 1.
+    * this line is highlighted as well with the option set to 2
+  * [ ] this line is never highlighted
+
+Value           Description~
+0               Don't highlight anything.
+1               Highlight only the first line of a checked [X] list item.
+2               Highlight a complete checked list item and all its child items.
+
+Default: 0
+
+The |group-name| "Comment" is used for highlighting.
+
+Note: Option 2 does not work perfectly.  Specifically, it might break if the
+list item contains preformatted text or if you mix tabs and spaces for
+indenting.  Also, indented headers can be highlighted erroneously.
+Furthermore, if your list is long, Vim's highlight can break. To solve this,
+consider putting >
+ au BufEnter *.wiki :syntax sync fromstart
+in your .vimrc
+
+------------------------------------------------------------------------------
+*g:vimwiki_global_ext*
+
+Control the creation of |vimwiki-temporary-wiki|s.
+
+If a file with a registered extension (see |vimwiki-register-extension|) is
+opened in a directory that is: 1) not listed in |g:vimwiki_list|, and 2) not a
+subdirectory of any such directory, then:
+
+Value           Description~
+1               make temporary wiki and append it to |g:vimwiki_list|.
+0               don't make temporary wiki in that dir.
+
+If your preferred wiki extension is .txt then you can >
+    let g:vimwiki_global_ext = 0
+to restrict Vimwiki's operation to only those paths listed in g:vimwiki_list.
+Other text files wouldn't be treated as wiki pages.
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_ext2syntax* *vimwiki-register-extension*
+
+A many-to-one mapping between file extensions and syntaxes whose purpose is to
+register the extensions with Vimwiki.
+
+E.g.: >
+  let g:vimwiki_ext2syntax = {'.md': 'markdown',
+                  \ '.mkd': 'markdown',
+                  \ '.wiki': 'media'}
+
+An extension that is registered with Vimwiki can trigger creation of
+a |vimwiki-temporary-wiki|. File extensions used in |g:vimwiki_list| are
+automatically registered with Vimwiki using the default syntax. Extensions
+mapped with this option will instead use the mapped syntax.
+
+Default: >
+    {'.md': 'markdown', '.mkdn': 'markdown',
+    \  '.mdwn': 'markdown', '.mdown': 'markdown',
+    \  '.markdown': 'markdown', '.mw': 'media'}},
+
+Note: setting this option will overwrite the default values so include them if
+desired.
+
+------------------------------------------------------------------------------
+*g:vimwiki_menu*
+
+Create a menu in the menu bar of GVim, where you can open the available wikis.
+If the wiki has an assigned name (see |vimwiki-option-name|), the menu entry
+will match the name. Otherwise, the final folder of |vimwiki-option-path| will
+be used for the name. If there are duplicate entries the index number from
+|g:vimwiki_list| will be appended to the name.
+
+Value              Description~
+''                 No menu
+'Vimwiki'          Top level menu "Vimwiki"
+'Plugin.Vimwiki'   "Vimwiki" submenu of top level menu "Plugin"
+etc.
+
+Default: 'Vimwiki'
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_listsyms*
+
+String of at least two symbols to show the progrssion of todo list items.
+Default value is ' .oOX'.
+
+The first char is for 0% done items.
+The last is for 100% done items.
+
+You can set it to some more fancy symbols like this:
+>
+   let g:vimwiki_listsyms = '✗○◐●✓'
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_listsym_rejected*
+
+Character that is used to show that an item of a todo list will not be done.
+Default value is '-'.
+
+The character used here must not be part of |g:vimwiki_listsyms|.
+
+You can set it to a more fancy symbol like this:
+>
+   let g:vimwiki_listsym_rejected = '✗'
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_folding*
+
+Enable/disable Vimwiki's folding (outline) functionality. Folding in Vimwiki
+can use either the 'expr' or the 'syntax' |foldmethod| of Vim.
+
+Value           Description~
+''              Disable folding
+'expr'          Folding based on expression (folds sections and code blocks)
+'syntax'        Folding based on syntax (folds sections; slower than 'expr')
+'list'          Folding based on expression (folds list subitems; much slower)
+'custom'        Allow folding options to be set by another plugin or a vim
+                configuration file
+
+Default: ''
+
+Limitations:
+  - Opening very large files may be slow when folding is enabled.
+  - 'list' folding is particularly slow with larger files.
+  - 'list' is intended to work with lists nicely indented with 'shiftwidth'.
+  - 'syntax' is only available for the default syntax so far.
+
+The options above can be suffixed with ':quick' (e.g.: 'expr:quick') in order
+to use some workarounds to make folds work faster.
+
+------------------------------------------------------------------------------
+*g:vimwiki_list_ignore_newline*
+
+This is HTML related.
+Convert newlines to <br />s in multiline list items.
+
+Value           Description~
+0               Newlines in a list item are converted to <br />s.
+1               Ignore newlines.
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_text_ignore_newline*
+
+This is HTML related.
+Convert newlines to <br />s in text.
+
+Value           Description~
+0               Newlines in text are converted to <br />s.
+1               Ignore newlines.
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_use_calendar*
+
+Create new or open existing diary wiki-file for the date selected in Calendar.
+See |vimwiki-calendar|.
+
+Value           Description~
+0               Do not use calendar.
+1               Use calendar.
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_create_link*
+
+Create target wiki page if it does not exist. See |:VimwikiFollowLink|.
+
+Value           Description~
+0               Do not create target wiki page.
+1               Create target wiki page.
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_markdown_link_ext*
+
+Append wiki file extension to links in Markdown. This is needed for
+compatibility with other Markdown tools.
+
+Value           Description~
+0               Do not append wiki file extension.
+1               Append wiki file extension.
+
+Default: 0
+
+
+------------------------------------------------------------------------------
+*VimwikiLinkHandler*
+
+A customizable link handler can be defined to override Vimwiki's behavior when
+opening links.  Each recognized link, whether it is a wikilink, wiki-include
+link or a weblink, is first passed to |VimwikiLinkHandler| to see if it can be
+handled. The return value 1 indicates success.
+
+If the link is not handled successfully, the behavior of Vimwiki depends on
+the scheme.  "wiki:", "diary:" or schemeless links are opened in Vim.  "file:"
+and "local:" links are opened with a system default handler.
+
+You can redefine the VimwikiLinkHandler function in your .vimrc to do
+something else: >
+
+  function! VimwikiLinkHandler(link)
+    try
+      let browser = 'C:\Program Files\Firefox\firefox.exe'
+      execute '!start "'.browser.'" ' . a:link
+      return 1
+    catch
+      echo "This can happen for a variety of reasons ..."
+    endtry
+    return 0
+  endfunction
+
+A second example handles a new scheme, "vfile:", which behaves similar to
+"file:", but the files are always opened with Vim in a new tab: >
+
+  function! VimwikiLinkHandler(link)
+    " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
+    "   1) [[vfile:~/Code/PythonProject/abc123.py]]
+    "   2) [[vfile:./|Wiki Home]]
+    let link = a:link
+    if link =~# '^vfile:'
+      let link = link[1:]
+    else
+      return 0
+    endif
+    let link_infos = vimwiki#base#resolve_link(link)
+    if link_infos.filename == ''
+      echomsg 'Vimwiki Error: Unable to resolve link!'
+      return 0
+    else
+      exe 'tabnew ' . fnameescape(link_infos.filename)
+      return 1
+    endif
+  endfunction
+
+------------------------------------------------------------------------------
+*VimwikiLinkConverter*
+
+This function can be overridden in your .vimrc to specify what a link looks
+like when converted to HTML.  The parameters of the function are:
+        - the link as a string
+        - the full path to the wiki file where the link is in
+        - the full path to the output HTML file
+It should return the HTML link if successful or an empty string '' otherwise.
+
+This example changes how relative links to external files using the "local:"
+scheme look like in HTML.  Per default, they would become links relative to
+the HTML output directory.  This function converts them to links relative to
+the wiki file, i.e. a link [[local:../document.pdf]] becomes
+<a href="../document.pdf">. Also, this function will copy document.pdf to the
+right place. >
+
+  function! VimwikiLinkConverter(link, source_wiki_file, target_html_file)
+    if a:link =~# '^local:'
+      let link_infos = vimwiki#base#resolve_link(a:link)
+      let html_link = vimwiki#path#relpath(
+                \ fnamemodify(a:source_wiki_file, ':h'), link_infos.filename)
+      let relative_link =
+                \ fnamemodify(a:target_html_file, ':h') . '/' . html_link
+      call system('cp ' . fnameescape(link_infos.filename) .
+                \ ' ' . fnameescape(relative_link))
+      return html_link
+    endif
+    return ''
+  endfunction
+
+------------------------------------------------------------------------------
+*VimwikiWikiIncludeHandler*
+
+Vimwiki includes the content of a wiki-include URL as an image by default.
+
+A trial feature allows you to supply your own handler for wiki-include links.
+The handler should return the empty string when it does not recognize or
+cannot otherwise convert the link.  A customized handler might look like this: >
+
+  " Convert {{URL|#|ID}} -> URL#ID
+  function! VimwikiWikiIncludeHandler(value)
+    let str = a:value
+
+    " complete URL
+    let url_0 = matchstr(str, g:vimwiki_rxWikiInclMatchUrl)
+    " URL parts
+    let link_infos = vimwiki#base#resolve_link(url_0)
+    let arg1 = matchstr(str, VimwikiWikiInclMatchArg(1))
+    let arg2 = matchstr(str, VimwikiWikiInclMatchArg(2))
+
+    if arg1 =~ '#'
+      return link_infos.filename.'#'.arg2
+    endif
+
+    " Return the empty string when unable to process link
+    return ''
+  endfunction
+<
+
+------------------------------------------------------------------------------
+*g:vimwiki_table_auto_fmt*
+
+Enable/disable table auto formatting after leaving INSERT mode.
+
+Value           Description~
+0               Disable table auto formatting.
+1               Enable table auto formatting.
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_table_reduce_last_col*
+
+If set, the last column separator will not be expanded to fill the cell.  When
+`:set wrap` this option improves how a table is displayed, particularly on
+small screens.  If |g:vimwiki_table_auto_fmt| is set to 0, this option has no
+effect.
+
+Value           Description~
+0               Enable table auto formating for all columns.
+1               Disable table auto formating for the last column.
+
+Default: 0
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_w32_dir_enc*
+
+Convert directory name from current 'encoding' into 'g:vimwiki_w32_dir_enc'
+before it is created.
+
+If you have 'enc=utf-8' and set up >
+    let g:vimwiki_w32_dir_enc = 'cp1251'
+<
+then following the next link with <CR>: >
+    [[привет/мир]]
+>
+would convert utf-8 'привет' to cp1251 and create directory with that name.
+
+Default: ''
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_CJK_length*
+
+Use a special method to calculate the correct length of the strings with
+double-wide characters (to align table cells properly).
+
+Value           Description~
+0               Do not use it.
+1               Use it.
+
+Default: 0
+
+Note: Vim 7.3 has a new function |strdisplaywidth()|, so for users of an up to
+date Vim, this option is obsolete.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_dir_link*
+
+This option is about what to do with links to directories, like
+[[directory/]], [[papers/]], etc.
+
+Value           Description~
+''              Open 'directory/' using the standard netrw plugin.
+'index'         Open 'directory/index.wiki', create if needed.
+'main'          Open 'directory/main.wiki', create if needed.
+etc.
+
+Default: '' (empty string)
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_html_header_numbering*
+
+Set this option if you want headers to be auto-numbered in HTML.
+
+E.g.: >
+    1 Header1
+    1.1 Header2
+    1.2 Header2
+    1.2.1 Header3
+    1.2.2 Header3
+    1.3 Header2
+    2 Header1
+    3 Header1
+etc.
+
+Value           Description~
+0               Header numbering is off.
+1               Header numbering is on. Headers are numbered starting from
+                header level 1.
+2               Header numbering is on. Headers are numbered starting from
+                header level 2.
+etc.
+
+Example when g:vimwiki_html_header_numbering = 2: >
+    Header1
+    1 Header2
+    2 Header2
+    2.1 Header3
+    2.1.1 Header4
+    2.1.2 Header4
+    2.2 Header3
+    3 Header2
+    4 Header2
+etc.
+
+Default: 0
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_html_header_numbering_sym*
+
+Ending symbol for |g:vimwiki_html_header_numbering|.
+
+Value           Description~
+'.'             Dot will be added after a header's number.
+')'             Closing bracket will be added after a header's number.
+etc.
+
+With
+    let g:vimwiki_html_header_numbering_sym = '.'
+headers would look like: >
+    1. Header1
+    1.1. Header2
+    1.2. Header2
+    1.2.1. Header3
+    1.2.2. Header3
+    1.3. Header2
+    2. Header1
+    3. Header1
+
+
+Default: '' (empty)
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_valid_html_tags*
+
+Case-insensitive comma separated list of HTML tags that can be used in
+Vimwiki.  When converting to HTML, these tags are left as they are, while
+every other tag is escaped.
+
+Default: 'b,i,s,u,sub,sup,kbd,br,hr'
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_user_htmls*
+
+Comma-separated list of HTML files that have no corresponding wiki files and
+should not be deleted after |:VimwikiAll2HTML|.
+
+Default: ''
+
+Example:
+Consider you have 404.html and search.html in your Vimwiki 'path_html'.
+With: >
+    let g:vimwiki_user_htmls = '404.html,search.html'
+they would not be deleted after |:VimwikiAll2HTML|.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_conceallevel*
+
+In Vim 7.3 'conceallevel' is local to the current window, thus if you open a
+Vimwiki buffer in a new tab or window, it would be set to the default value.
+
+Vimwiki sets 'conceallevel' to g:vimwiki_conceallevel every time a Vimwiki
+buffer is entered.
+
+With default settings, Vimwiki conceals one-character markers, shortens long
+URLs and hides markers and URL for links that have a description.
+
+Default: 2
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_conceal_onechar_markers*
+
+Control the concealment of one-character markers.
+
+Setting 'conceal_onechar_markers' to 0 will show the markers, overriding
+whatever value is set in |g:vimwiki_conceallevel|
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_conceal_pre*
+
+Conceal preformatted text markers. For example,
+>
+    {{{python
+    def say_hello():
+        print("Hello, world!")
+    }}}
+>
+would appear as simply
+>
+    def say_hello():
+        print("Hello, world!")
+>
+in your wiki file.
+
+Default: 0
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_autowriteall*
+
+Automatically save a modified wiki buffer when switching wiki pages. Has the
+same effect as setting the Vim option 'autowriteall', but it works for wiki
+files only, while the Vim option is global.
+Hint: if you're just annoyed that you have to save files manually to switch
+wiki pages, consider setting the Vim option 'hidden' which makes that modified
+files don't need to be saved.
+
+Value           Description~
+0               autowriteall is off
+1               autowriteall is on
+
+Default: 1
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_url_maxsave*
+
+Setting the value of |g:vimwiki_url_maxsave| to 0 will prevent any link
+shortening: you will see the full URL in all types of links, with no parts
+being concealed. This option does not affect the concealing of wiki elements
+such as bold, italic, wikilinks, etc.
+
+When positive, the value determines the maximum number of characters that
+are retained at the end after concealing the middle part of a long URL.
+It could be less: in case one of the characters /,#,? is found near the end,
+the URL will be concealed up to the last occurrence of that character.
+
+Note:
+  * The conceal feature works only with Vim >= 7.3.
+  * When using the default |wrap| option of Vim, the effect of concealed links
+    is not always pleasing, because the visible text on longer lines with
+    a lot of concealed parts may appear to be strangely broken across several
+    lines. This is a limitation of Vim's |conceal| feature.
+  * Many color schemes do not define an unobtrusive color for the Conceal
+    highlight group - this might be quite noticeable on shortened URLs.
+
+
+Default: 15
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_diary_months*
+
+It is a |Dictionary| with the numbers of months and corresponding names. Diary
+uses it.
+
+Redefine it in your .vimrc to get localized months in your diary:
+let g:vimwiki_diary_months = {
+      \ 1: 'Январь', 2: 'Февраль', 3: 'Март',
+      \ 4: 'Апрель', 5: 'Май', 6: 'Июнь',
+      \ 7: 'Июль', 8: 'Август', 9: 'Сентябрь',
+      \ 10: 'Октябрь', 11: 'Ноябрь', 12: 'Декабрь'
+      \ }
+
+Default:
+let g:vimwiki_diary_months = {
+      \ 1: 'January', 2: 'February', 3: 'March',
+      \ 4: 'April', 5: 'May', 6: 'June',
+      \ 7: 'July', 8: 'August', 9: 'September',
+      \ 10: 'October', 11: 'November', 12: 'December'
+      \ }
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_toc_header*
+
+A string with the magic header that tells Vimwiki where the Table of Contents
+(see |vimwiki-toc|) is located in a file. You can change it to the
+appropriate word in your mother tongue like this: >
+  let g:vimwiki_toc_header = 'Inhalt'
+
+The default is 'Contents'.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_toc_header_level*
+
+The header level of the Table of Contents (see |vimwiki-toc|). Valid values
+are from 1 to 6.
+
+The default is 1.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_toc_link_format*
+
+The format of the links in the Table of Contents (see |vimwiki-toc|).
+
+
+Value           Description~
+0               Extended: The link contains the description and URL. URL
+                references all levels.
+1               Brief: The link contains only the URL. URL references only
+                the immediate level.
+
+Default: 0
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_map_prefix*
+
+A string which specifies the prefix for all global mappings (and some local
+ones).  Use it to avoid conflicts with other plugins.  Note that it must be
+defined before the plugin loads.  >
+  let g:vimwiki_map_prefix = '<Leader>e'
+
+The default is '<Leader>w'.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_auto_chdir*
+
+When set to 1, enables auto-cd feature. Whenever Vimwiki page is opened,
+Vimwiki performs an |:lcd| to the root Vimwiki folder of the page's wiki.
+
+
+Value           Description~
+0               Do not change directory.
+1               Change directory to root Vimwiki folder on opening page.
+
+Default: 0
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_links_header*
+
+A string with the magic header that tells Vimwiki where the generated links
+are located in a file. You can change it to the appropriate word in your
+mother tongue like this: >
+  let g:vimwiki_links_header = 'Generierte Links'
+
+The default is 'Generated Links'.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_links_header_level*
+
+The header level of generated links. Valid values are from 1 to 6.
+
+The default is 1.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_tags_header*
+
+A string with the magic header that tells Vimwiki where the generated tags
+are located in a file. You can change it to the appropriate word in your
+mother tongue like this: >
+  let g:vimwiki_tags_header = 'Generierte Stichworte'
+
+The default is 'Generated Tags'.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_tags_header_level*
+
+The header level of generated tags. Valid values are from 1 to 5.
+
+The default is 1.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_markdown_header_style*
+
+The number of newlines to be inserted after a header is generated. Valid
+values are from 0 to 2.
+
+The default is 1.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_auto_header*
+
+Set this option to 1 to automatically generate a level 1 header when creating
+a new wiki page. This option is disabled for the wiki index and the diary
+index. Spaces replaced with |vimwiki-option-links_space_char| are reverted
+back to spaces in the generated header, which will match the filename
+except for the characters that were reverted to spaces.
+
+For example, with `links_space_char` set to `'_'` creating a link from the text
+`foo bar link` would result in `[[foo_bar_link]]` and the file
+`foo_bar_link.wiki`. The generated header would be `= foo bar link =`
+
+The default is 0.
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_key_mappings*
+
+A dictionary that is used to enable/disable various key mapping groups. To
+disable a specific group set the value for the associated key to 0.
+For example: >
+
+  let g:vimwiki_key_mappings =
+    \ {
+    \ 'headers': 0,
+    \ 'text_objs': 0,
+    \ }
+
+To disable ALL Vimwiki key mappings use: >
+
+    let g:vimwiki_key_mappings = { 'all_maps': 0, }
+
+The valid key groups and their associated mappings are shown below.
+
+`all_maps`:
+  Used to disable all Vimwiki key mappings.
+`global`:
+  |vimwiki-global-mappings| that are defined when Vim starts.
+`headers`:
+  Mappings for header navigation and manipulation:
+  |vimwiki_=|, |vimwiki_-|, |vimwiki_[[|, |vimwiki_]]|, |vimwiki_[=|
+  |vimwiki_]=|, |vimwiki_]u| , |vimwiki_[u|
+`text_objs`:
+  |vimwiki-text-objects| mappings.
+`table_format`:
+  Mappings used for table formatting.
+  |vimwiki_gqq|, |vimwiki_gww|, |vimwiki_gq1|, |vimwiki_gw1|
+  |vimwiki_<A-Left>|, |vimwiki_<A-Right>|
+`table_mappings`:
+    Table mappings for insert mode.
+    |vimwiki_<Tab>|, |vimwiki_<S-Tab>|
+`lists`:
+    Mappings for list manipulation.
+    |vimwiki_<C-Space>|, |vimwiki_gl<Space>|, |vimwiki_gL<Space>| |vimwiki_gln|, |vimwiki_glp|
+    |vimwiki_gll|, |vimwiki_gLl|, |vimwiki_glh|, |vimwiki_gLh|, |vimwiki_glr|, |vimwiki_gLr|
+    |vimwiki_glsar|, |vimwiki_gLstar|, |vimwiki_gl#|, |vimwiki_gL#|, |vimwiki_gl-|, |vimwiki_gL-|
+    |vimwiki_gl1|, |vimwiki_gL1|, |vimwiki_gla|, |vimwiki_gLa|, |vimwiki_glA|, |vimwiki_gLA|
+    |vimwiki_gli|, |vimwiki_gLi|, |vimwiki_glI|, |vimwiki_gLI|, |vimwiki_glx|
+`links`:
+    Mappings for link creation and navigation.
+    |vimwiki_<Leader>w<Leader>i|, |vimwiki_<CR>|, |vimwiki_<S-CR>|, |vimwiki_<C-CR>|
+    |vimwiki_<C-S-CR>|, |vimwiki_<D-CR>|, |vimwiki_<Backspace>|, |vimwiki_<Tab>|
+    |vimwiki_<S-Tab>|, |vimwiki_<Leader>wd|, |vimwiki_<Leader>wr|, |vimwiki_<C-Down>|
+    |vimwiki_<C-Up>|, |vimwiki_+|, |vimwiki_<Backspace>|
+`html`:
+    Mappings for HTML generation.
+    |vimwiki_<Leader>wh|, |vimwiki_<Leader>whh|
+`mouse`:
+    Mouse mappings, see |vimwiki_mouse|. This option is disabled by default.
+
+The default is to enable all key mappings except the mouse: >
+  let g:vimwiki_key_mappings =
+    \ {
+    \   'all_maps': 1,
+    \   'global': 1,
+    \   'headers': 1,
+    \   'text_objs': 1,
+    \   'table_format': 1,
+    \   'table_mappings': 1,
+    \   'lists': 1,
+    \   'links': 1,
+    \   'html': 1,
+    \   'mouse': 0,
+    \ }
+
+
+------------------------------------------------------------------------------
+*g:vimwiki_filetypes*
+
+A list of additional fileypes that should be registered to vimwiki files: >
+
+  let g:vimwiki_filetypes = ['markdown', 'pandoc']
+
+Would result in the filetype being set to `vimwiki.markdown.pandoc`. This can
+be used to enable third party plugins such as custom folding. WARNING: this
+option can allow other plugins to overwrite vimwiki settings and operation so
+take care when using it. Any plugin that uses a set filetype will be enabled.
+
+The default is `[ ]`e

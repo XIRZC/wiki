@@ -27,9 +27,18 @@
 10. [[docs/Comments|Comments]]
 11. [[docs/Horizontal line|Horizontal line]]
 12. [[docs/Tags|Tags]]
+
+== Options ==
+
+1. [[docs/Registered Wiki|Registered Wiki]]
+2. [[docs/Temporary Wiki|Temporary Wiki]]
+3. [[docs/Per-Wiki Options|Per Wiki Options]]
+4. [[docs/Global Options|Global Options]]
+
 == Miscellaneous ==
 - [[docs/Folding|Folding]]
 - [[docs/Placeholders|Placeholders]]
 - [[docs/ListsExtra|ListsExtra]]
 - [[docs/TablesExtra|TablesExtra]]
 - [[docs/Diary|Diary]]
+- [[docs/Anchors|Anchors]]
