@@ -260,7 +260,7 @@ would give you Python and C++ highlighting in: >
  }
  }}}
 
-or in: >
+or in: 
  {{{c++
  #include "helloworld.h"
  int helloworld()
