@@ -44,3 +44,6 @@ The original Vimwiki was hosted on Google Code which has since shutdown.
 - [[https://github.com/jceb/vim-orgmode|vim-orgmode]]
 - [[https://github.com/tbabej/taskwiki|taskwiki]]
 - [[https://github.com/xolox/vim-notes|vim-notes]]
+ 
+== Micellaneous == 
+- [[https://emm.ink/notes/|Notes]]
